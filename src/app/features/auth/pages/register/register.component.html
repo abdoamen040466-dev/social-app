@@ -1,1 +1,95 @@
-<p>register works!</p>
+<section class="min-h-screen flex justify-center py-8">
+  <form class="max-w-lg w-full mx-auto space-y-4 bg-white shadow-2xl rounded p-5">
+    <header class="flex flex-col items-center gap-1">
+      <h1 class="font-bold text-3xl">Register</h1>
+      <p class="font-medium">Create your account to continue</p>
+    </header>
+    <div>
+      <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Full Name</label>
+      <input
+        type="text"
+        id="name"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+        placeholder=""
+        required
+      />
+    </div>
+    <div>
+      <label for="username" class="block mb-2.5 text-sm font-medium text-heading">UserName</label>
+      <input
+        type="text"
+        id="username"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+        placeholder=""
+        required
+      />
+    </div>
+    <div>
+      <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email Address</label>
+      <input
+        type="text"
+        id="email"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+        placeholder=""
+        required
+      />
+    </div>
+    <div>
+      <label for="gender" class="block mb-2.5 text-sm font-medium text-heading">Gender</label>
+      <select
+        id="gender"
+        class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+      >
+        <option selected>Select Gender</option>
+        <option value="male">male</option>
+        <option value="female">female</option>
+      </select>
+    </div>
+    <div>
+      <label for="DateofBirth" class="block mb-2.5 text-sm font-medium text-heading"
+        >Date Of Birth</label
+      >
+      <input
+        type="date"
+        id="DateofBirth"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+        placeholder=""
+        required
+      />
+    </div>
+    <div>
+      <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password</label>
+      <input
+        type="password"
+        id="password"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+        placeholder=""
+        required
+      />
+    </div>
+    <div>
+      <label for="repassword" class="block mb-2.5 text-sm font-medium text-heading"
+        >Confirm Password</label
+      >
+      <input
+        type="password"
+        id="repassword"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+        placeholder=""
+        required
+      />
+    </div>
+    <button
+      type="button"
+      class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+    >
+      create Account
+    </button>
+    <div>
+      <p class="text-center">
+        Already have an account?
+        <a routerLink="/login" class="text-blue-600 font-semibold">Login</a>
+      </p>
+    </div>
+  </form>
+</section>

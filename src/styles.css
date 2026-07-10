@@ -6,3 +6,8 @@
 @import 'flowbite/src/themes/default';
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+
+html,
+body {
+  background-color: #f0f2f5;
+}
