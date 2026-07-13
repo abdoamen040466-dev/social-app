@@ -1,1 +1,188 @@
-<p>register works!</p>
+<section class="min-h-screen flex justify-center py-8">
+  <form
+    [formGroup]="registerForm"
+    (ngSubmit)="submitForm()"
+    class="max-w-lg w-full mx-auto space-y-4 bg-white shadow-2xl rounded p-5"
+  >
+    <header class="flex flex-col items-center gap-1">
+      <h1 class="font-bold text-3xl">Register</h1>
+      <p class="font-medium">Create your account to continue</p>
+    </header>
+    <div>
+      <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Full Name</label>
+      <input
+        formControlName="name"
+        type="text"
+        id="name"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      />
+      @if (input.name.invalid && input.name.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.name.hasError('minlength')) {
+            <span
+              >name must be {{ input.name.errors?.['minlength']?.requiredLength }} charecters at
+              leasr</span
+            >
+          } @else if (input.name.hasError('required')) {
+            <span>name is required</span>
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <label for="username" class="block mb-2.5 text-sm font-medium text-heading">UserName</label>
+      <input
+        formControlName="username"
+        type="text"
+        id="username"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      />
+      @if (input.username.invalid && input.username.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.username.hasError('pattern')) {
+            <span>Username can only contain lowercase letters, numbers, and underscores.</span>
+          } @else if (input.username.hasError('required')) {
+            <span>username is required</span>
+          } @else if (input.username.hasError('minlength')) {
+            <span>Username must be at least 3 characters.</span>
+          } @else if (input.username.hasError('maxlength')) {
+            <span>Username must not exceed 30 characters.</span>
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email Address</label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      />
+      @if (input.email.invalid && input.email.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.email.hasError('email')) {
+            <span>Please enter a valid email</span>
+          } @else if (input.email.hasError('required')) {
+            <span>email is required</span>
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <label for="gender" class="block mb-2.5 text-sm font-medium text-heading">Gender</label>
+      <select
+        formControlName="gender"
+        id="gender"
+        class="block w-full px-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+      >
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      @if (input.gender.invalid && input.gender.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.gender.hasError('required')) {
+            <span>Gender is required</span>
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <label for="dateofBirth" class="block mb-2.5 text-sm font-medium text-heading"
+        >Date Of Birth</label
+      >
+      <input
+        formControlName="dateOfBirth"
+        type="date"
+        id="dateofBirth"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      />
+      @if (input.dateOfBirth.invalid && input.dateOfBirth.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.dateOfBirth.hasError('required')) {
+            <span>date of birth is required</span>
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password</label>
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      />
+      @if (input.password.invalid && input.password.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.password.hasError('required')) {
+            <span>password is required</span>
+          } @else if (input.password.hasError('pattern')) {
+            <span
+              >Password must be at least 8 characters long and include an uppercase letter, a
+              lowercase letter, a number, and a special character.</span
+            >
+          }
+        </div>
+      }
+    </div>
+    <div>
+      <label for="repassword" class="block mb-2.5 text-sm font-medium text-heading"
+        >Confirm Password</label
+      >
+      <input
+        formControlName="rePassword"
+        type="password"
+        id="repassword"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-base rounded-base focus:ring-brand focus:border-brand block w-full px-2.5 py-2 shadow-xs placeholder:text-body"
+      />
+      @if (
+        input.rePassword.touched &&
+        (input.rePassword.hasError('required') || registerForm.hasError('passwordMismatch'))
+      ) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.rePassword.hasError('required')) {
+            <span>Confirm password is required</span>
+          } @else if (registerForm.hasError('passwordMismatch')) {
+            <span>Passwords do not match.</span>
+          }
+        </div>
+      }
+    </div>
+    <button
+      [disabled]="registerForm.invalid"
+      type="submit"
+      class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+    >
+      create Account
+    </button>
+    <div>
+      <p class="text-center">
+        Already have an account?
+        <a routerLink="/login" class="text-blue-600 font-semibold">Login</a>
+      </p>
+    </div>
+  </form>
+</section>
