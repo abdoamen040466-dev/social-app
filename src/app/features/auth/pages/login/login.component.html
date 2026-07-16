@@ -1,1 +1,63 @@
-<p>login works!</p>
+<section class="h-screen flex items-center">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="submitLogin()"
+    class="max-w-lg w-full mx-auto shadow-2xl rounded p-5"
+  >
+    <div class="mb-5">
+      <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email:</label>
+      <input
+        formControlName="email"
+        type="email"
+        id="email"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        placeholder="Enter Your email"
+      />
+      @if (input.email.invalid && input.email.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          @if (input.email.hasError('required')) {
+            <span>email is required</span>
+          } @else if (input.email.hasError('email')) {
+            <span>Please Enter Valid Email</span>
+          }
+        </div>
+      }
+    </div>
+    <div class="mb-5">
+      <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password:</label>
+      <input
+        formControlName="password"
+        type="password"
+        id="password"
+        class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+        placeholder="••••••••"
+      />
+      @if (input.password.invalid && input.password.touched) {
+        <div
+          class="p-1 my-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+          role="alert"
+        >
+          <span>password is required</span>
+        </div>
+      }
+    </div>
+    <button
+      [disabled]="loginForm.invalid"
+      [class.cursor-not-allowed]="loginForm.invalid"
+      [class.cursor-pointer]="loginForm.valid"
+      type="submit"
+      class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+    >
+      Submit
+    </button>
+    <div>
+      <p class="text-center">
+        Don't have an account?
+        <a routerLink="/register" class="text-blue-600 font-semibold">Create one</a>
+      </p>
+    </div>
+  </form>
+</section>
