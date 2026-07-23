@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,8 +6,11 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { passwordMatcher } from '../../validators/password-match.validator';
+import { AuthService } from '../../../../core/auth/services/auth.service';
+import { RegisterRequest } from '../../models/register-request';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +19,12 @@ import { passwordMatcher } from '../../validators/password-match.validator';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly toaster = inject(ToastrService);
+
+  isLoading: boolean = false;
+
   readonly registerForm = new FormGroup(
     {
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -34,7 +43,7 @@ export class RegisterComponent {
       ]),
       rePassword: new FormControl('', [Validators.required /*, Validators*/]),
     },
-    { validators: passwordMatcher },
+    { validators: passwordMatcher, updateOn: 'blur' },
   );
 
   get input() {
@@ -42,10 +51,24 @@ export class RegisterComponent {
   }
 
   submitForm(): void {
-    console.log(this.registerForm);
-    // console.log(this.registerForm.valid);
-    // console.log(this.registerForm.errors);
-    // console.log(this.registerForm.value);
-    // console.log(this.registerForm.get('password'));
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+    this.isLoading = true;
+    this.authService.register(this.registerForm.getRawValue() as RegisterRequest).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.toaster.success('Account Added Sucessfuly', 'Register', {
+          closeButton: true,
+        });
+
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.error(err);
+      },
+    });
   }
 }
