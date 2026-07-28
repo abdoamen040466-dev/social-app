@@ -44,7 +44,7 @@ export class RegisterComponent {
       ]),
       rePassword: new FormControl('', [Validators.required /*, Validators*/]),
     },
-    { validators: passwordMatcher, updateOn: 'blur' },
+    { validators: passwordMatcher },
   );
 
   get input() {
