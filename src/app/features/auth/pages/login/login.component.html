@@ -4,6 +4,9 @@
     (ngSubmit)="submitLogin()"
     class="max-w-lg w-full mx-auto shadow-2xl rounded p-5"
   >
+    <header>
+      <h1 class="mb-4 font-bold text-center text-4xl">Login</h1>
+    </header>
     <div class="mb-5">
       <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email:</label>
       <input
@@ -45,14 +48,33 @@
       }
     </div>
     <button
-      [disabled]="loginForm.invalid"
-      [class.cursor-not-allowed]="loginForm.invalid"
-      [class.cursor-pointer]="loginForm.valid"
+      [disabled]="loginForm.invalid || isLoading()"
+      [class]="
+        (loginForm.dirty && loginForm.invalid) || isLoading()
+          ? 'hover:bg-gray-500 bg-gray-500'
+          : 'cursor-pointer'
+      "
       type="submit"
       class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
     >
-      Submit
+      @if (isLoading()) {
+        <span>
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          Logging in..
+        </span>
+      } @else {
+        Submit
+      }
     </button>
+    @if (errorMessage()) {
+      <div
+        class="p-1 mb-2 mt-1 text-sm text-fg-danger-strong rounded-base bg-danger-soft"
+        role="alert"
+      >
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
+
     <div>
       <p class="text-center">
         Don't have an account?

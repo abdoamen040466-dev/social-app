@@ -174,7 +174,9 @@
     <button
       [disabled]="registerForm.invalid || isLoading()"
       [class]="
-        registerForm.invalid || isLoading() ? 'hover:bg-gray-500 bg-gray-500' : 'cursor-pointer'
+        (registerForm.invalid && registerForm.dirty) || isLoading()
+          ? 'hover:bg-gray-500 bg-gray-500'
+          : 'cursor-pointer'
       "
       type="submit"
       class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
