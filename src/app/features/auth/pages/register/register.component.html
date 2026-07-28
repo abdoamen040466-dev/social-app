@@ -172,14 +172,14 @@
       }
     </div>
     <button
-      [disabled]="registerForm.invalid || isLoading"
+      [disabled]="registerForm.invalid || isLoading()"
       [class]="
-        registerForm.invalid || isLoading ? 'hover:bg-gray-500 bg-gray-500' : 'cursor-pointer'
+        registerForm.invalid || isLoading() ? 'hover:bg-gray-500 bg-gray-500' : 'cursor-pointer'
       "
       type="submit"
       class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
     >
-      @if (isLoading) {
+      @if (isLoading()) {
         <span>
           <i class="fa-solid fa-spinner fa-spin"></i>
           Creating Account...
@@ -188,6 +188,11 @@
         create Account
       }
     </button>
+    @if (errorMessage()) {
+      <div class="p-1 mb-2 text-sm text-fg-danger-strong rounded-base bg-danger-soft" role="alert">
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
     <div>
       <p class="text-center">
         Already have an account?

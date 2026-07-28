@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -23,7 +23,8 @@ export class RegisterComponent {
   private readonly router = inject(Router);
   private readonly toaster = inject(ToastrService);
 
-  isLoading: boolean = false;
+  isLoading = signal<Boolean>(false);
+  errorMessage = signal(null);
 
   readonly registerForm = new FormGroup(
     {
@@ -51,14 +52,15 @@ export class RegisterComponent {
   }
 
   submitForm(): void {
+    this.errorMessage.set(null);
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
-    this.isLoading = true;
+    this.isLoading.set(true);
     this.authService.register(this.registerForm.getRawValue() as RegisterRequest).subscribe({
       next: (res) => {
-        this.isLoading = false;
+        this.isLoading.set(false);
         this.toaster.success('Account Added Sucessfuly', 'Register', {
           closeButton: true,
         });
@@ -66,8 +68,9 @@ export class RegisterComponent {
         this.router.navigate(['/login']);
       },
       error: (err) => {
-        this.isLoading = false;
-        console.error(err);
+        this.isLoading.set(false);
+        console.error(err.error.message);
+        this.errorMessage.set(err.error.message);
       },
     });
   }
