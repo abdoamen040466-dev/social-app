@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../../core/auth/services/auth.service';
+import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+  private readonly authStorage = inject(AuthStorageService);
 
   isLoading = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
@@ -37,6 +39,8 @@ export class LoginComponent {
       next: (res) => {
         this.isLoading.set(false);
         console.log(res);
+        this.authStorage.saveToken(res.data.token);
+        this.authStorage.saveUser(res.data.user);
         this.router.navigate(['/home']);
       },
       error: (err) => {
