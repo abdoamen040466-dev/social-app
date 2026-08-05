@@ -1,1 +1,70 @@
-<p>navbar works!</p>
+<section class="bg-white sticky shadow-sm top-0 z-50">
+  <nav class="max-w-7xl mx-auto flex justify-between px-4 py-2 items-center">
+    <div class="flex gap-3 items-center">
+      <div class="logo">
+        <img src="/assets/route.png" alt="" class="w-10 h-10 rounded-full object-cover" />
+      </div>
+      <h1 class="font-bold text-lg md:text-2xl">Route Posts</h1>
+    </div>
+
+    <div
+      class="hidden md:flex bg-mainColor text-gray-700 py-2 px-4 rounded-xl border border-gray-300 gap-4 items-center font-bold"
+    >
+      <a routerLink="/home" routerLinkActive="text-blue-700" class="hover:text-blue-700">
+        <i class="fa-regular fa-house"></i>
+        Feed
+      </a>
+      <a routerLink="/profile" routerLinkActive="text-blue-700" class="hover:text-blue-700">
+        <i class="fa-regular fa-user"></i>
+        Profile
+      </a>
+      <a routerLink="/notifications" routerLinkActive="text-blue-700" class="hover:text-blue-700">
+        <i class="fa-regular fa-comment"></i>
+        Notifications
+      </a>
+    </div>
+
+    <div class="bg-mainColor flex gap-3 items-center rounded-4xl border border-gray-300 py-1 px-4">
+      <div #menu class="relative block md:hidden cursor-pointer">
+        <i class="fa-solid fa-bars"></i>
+        <div
+          [hidden]="!isMenuOpened"
+          class="avaterMenu text-[13px] md:text-lg absolute border-2 border-gray-500 bg-mainColor top-15 left-1/2 -translate-x-1/2 rounded-md p-1"
+        >
+          <ul class="relative">
+            <i
+              class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
+            ></i>
+            <li class="pb-2 hover:text-blue-700"><a routerLink="/home">Feed</a></li>
+            <li class="border-y-2 border-black py-2 hover:text-blue-700">
+              <a routerLink="/profile">Profile</a>
+            </li>
+            <li class="pt-2 hover:text-blue-700">
+              <a routerLink="/notifications">Notifications</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div #avatar class="relative cursor-pointer">
+        <img src="/assets/default-profile.png" alt="" class="w-10 h-10 rounded-full object-cover" />
+        <div
+          [hidden]="!isAvatarOpened"
+          class="avaterMenu text-[13px] md:text-lg absolute border-2 border-gray-500 bg-mainColor top-17 left-1/2 -translate-x-1/2 rounded-md p-1"
+        >
+          <ul class="relative">
+            <i
+              class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
+            ></i>
+            <li class="pb-2 hover:text-blue-700"><a routerLink="/profile">Profile</a></li>
+            <li class="border-y-2 border-black py-2 hover:text-blue-700">
+              <a routerLink="/notifications">Notifications</a>
+            </li>
+            <li (click)="signOut()" class="pt-2 hover:text-blue-700">Sign out</li>
+          </ul>
+        </div>
+      </div>
+      <span class="hidden md:block font-semibold">Abdallah Amin</span>
+    </div>
+  </nav>
+</section>
