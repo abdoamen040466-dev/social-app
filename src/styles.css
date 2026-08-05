@@ -7,7 +7,6 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
-html,
-body {
-  background-color: #f0f2f5;
+@theme {
+  --color-mainColor: #f0f2f5;
 }
