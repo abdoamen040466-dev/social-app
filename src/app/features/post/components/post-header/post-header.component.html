@@ -22,7 +22,7 @@
         <i
           class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
         ></i>
-        @if (isPostMine()) {
+        @if (isOwner()) {
           <li class="pb-2 hover:text-blue-700 cursor-pointer">Edit</li>
           <li
             (click)="deletePost()"

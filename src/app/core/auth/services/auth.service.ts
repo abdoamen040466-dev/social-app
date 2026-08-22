@@ -7,6 +7,7 @@ import { LoginRequest } from '../../../features/auth/models/login-request';
 import { LoginResponse } from '../../../features/auth/models/login-response';
 import { environment } from '../../../../environments/environment.development';
 import { AuthStorageService } from './auth-storage.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ import { AuthStorageService } from './auth-storage.service';
 export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly authStorage = inject(AuthStorageService);
+  private readonly router = inject(Router);
 
   register(registerForm: RegisterRequest): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${environment.apiUrl}/users/signup`, registerForm);
@@ -29,5 +31,6 @@ export class AuthService {
 
   signout(): void {
     this.authStorage.clearStorage();
+    this.router.navigate(['/login']);
   }
 }
