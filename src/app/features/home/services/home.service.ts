@@ -12,13 +12,7 @@ export class HomeService {
   private readonly httpClient = inject(HttpClient);
   private readonly authStorageService = inject(AuthStorageService);
 
-  header: HttpHeaders = new HttpHeaders({
-    Authorization: `Bearer ${this.authStorageService.getToken()}`,
-  });
-
   getAllPosts(): Observable<AllPostsResponse> {
-    return this.httpClient.get<AllPostsResponse>(`${environment.apiUrl}/posts`, {
-      headers: this.header,
-    });
+    return this.httpClient.get<AllPostsResponse>(`${environment.apiUrl}/posts`);
   }
 }

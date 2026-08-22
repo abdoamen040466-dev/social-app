@@ -12,43 +12,22 @@ export class PostService {
   private readonly httpClient = inject(HttpClient);
   private readonly authStorageService = inject(AuthStorageService);
 
-  header: HttpHeaders = new HttpHeaders({
-    Authorization: `Bearer ${this.authStorageService.getToken()}`,
-  });
-
   Togglelike(postId: string): Observable<ToggleLikeResponse> {
     return this.httpClient.put<ToggleLikeResponse>(
       `${environment.apiUrl}/posts/${postId}/like`,
       {},
-      {
-        headers: this.header,
-      },
     );
   }
 
   savePost(postId: string): Observable<any> {
-    return this.httpClient.put(
-      `${environment.apiUrl}/posts/${postId}/bookmark`,
-      {},
-      {
-        headers: this.header,
-      },
-    );
+    return this.httpClient.put(`${environment.apiUrl}/posts/${postId}/bookmark`, {});
   }
 
   sharePost(postId: string): Observable<any> {
-    return this.httpClient.post(
-      `${environment.apiUrl}/posts/${postId}/share`,
-      {},
-      {
-        headers: this.header,
-      },
-    );
+    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/share`, {});
   }
 
   deletePost(postId: string): Observable<any> {
-    return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}`, {
-      headers: this.header,
-    });
+    return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}`);
   }
 }
