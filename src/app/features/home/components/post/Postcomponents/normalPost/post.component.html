@@ -1,0 +1,18 @@
+<section class="my-3">
+  <div
+    class="bg-neutral-primary-soft flex flex-col gap-7 max-w-4xl p-6 border border-default rounded-base shadow-xs m-auto"
+  >
+    <app-post-header [post]="post" [isShared]="false"></app-post-header>
+    <main>
+      <p class="text-[17px]">{{ post.body }}</p>
+      @if (post.image) {
+        <div class="image mt-4">
+          <img [src]="post.image" width="100%" alt="" />
+        </div>
+      }
+    </main>
+    @if (footerFlag) {
+      <app-post-footer [post]="post"></app-post-footer>
+    }
+  </div>
+</section>

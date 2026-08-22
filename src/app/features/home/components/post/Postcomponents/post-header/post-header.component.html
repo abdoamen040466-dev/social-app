@@ -1,0 +1,44 @@
+<header class="flex justify-between items-center">
+  <div class="left flex items-center gap-2">
+    <div class="image">
+      <img [src]="post.user.photo" alt="" class="w-10 h-10 rounded-full object-cover" />
+    </div>
+    <div>
+      <h2 class="font-bold">{{ post.user.name }}</h2>
+      <div class="flex gap-2 items-center">
+        <p class="font-light text-gray-600">{{ post.user.username }}</p>
+        <p class="font-light text-gray-600">{{ post.createdAt }}</p>
+        <span class="text-sm bg-gray-200 p-1 rounded-full">{{ post.privacy }}</span>
+      </div>
+    </div>
+  </div>
+  <div #menu [hidden]="isShared" class="icon relative">
+    <i class="fa-solid fa-ellipsis-vertical text-xl"></i>
+    <div
+      [hidden]="!isMenuOpened"
+      class="avaterMenu text-[13px] md:text-lg absolute border-2 border-gray-500 bg-mainColor top-10 left-1/2 -translate-x-1/2 rounded-md p-1"
+    >
+      <ul class="relative px-5">
+        <i
+          class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
+        ></i>
+        @if (isPostMine()) {
+          <li class="pb-2 hover:text-blue-700 cursor-pointer">Edit</li>
+          <li
+            (click)="deletePost()"
+            class="pb-2 hover:text-blue-700 cursor-pointer border-y border-t-black"
+          >
+            Delete
+          </li>
+        }
+        <li (click)="savePost()" class="pb-2 hover:text-blue-700 cursor-pointer">Save</li>
+        <li
+          (click)="sharePost()"
+          class="pb-2 hover:text-blue-700 cursor-pointer border-t border-t-black"
+        >
+          Share
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>

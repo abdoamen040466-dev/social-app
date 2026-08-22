@@ -1,0 +1,16 @@
+<div class="flex justify-between items-center">
+  <div class="flex gap-2 items-center">
+    <i
+      (click)="toggleLike()"
+      [class.text-blue-600]="liked()"
+      [class.text-black]="!liked()"
+      class="fa-solid fa-thumbs-up"
+    ></i>
+    <span class="font-light text-gray-500">{{ post.likesCount }} likes</span>
+  </div>
+  <div class="flex gap-2 items-center">
+    <p class="font-light text-gray-600">{{ post.sharesCount }} shares</p>
+    <p class="font-light text-gray-600">{{ post.commentsCount }} comments</p>
+    <p class="text-blue-600 font-medium">view details</p>
+  </div>
+</div>

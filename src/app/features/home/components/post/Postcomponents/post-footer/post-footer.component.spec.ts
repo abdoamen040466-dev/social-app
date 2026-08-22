@@ -1,0 +1,22 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { PostFooterComponent } from './post-footer.component';
+
+describe('PostFooterComponent', () => {
+  let component: PostFooterComponent;
+  let fixture: ComponentFixture<PostFooterComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [PostFooterComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(PostFooterComponent);
+    component = fixture.componentInstance;
+    await fixture.whenStable();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

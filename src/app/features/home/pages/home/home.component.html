@@ -1,1 +1,7 @@
-<app-post></app-post>
+@for (item of posts(); track item._id) {
+  @if (item.isShare) {
+    <app-shared-post [post]="item"></app-shared-post>
+  } @else {
+    <app-post [post]="item"></app-post>
+  }
+}

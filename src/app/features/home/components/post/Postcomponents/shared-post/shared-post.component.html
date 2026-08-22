@@ -1,0 +1,11 @@
+<section class="w-fit bg-neutral-primary-soft mx-auto border-default rounded-base shadow-xs p-6">
+  <div class="">
+    <app-post-header [post]="post!" [isShared]="true"></app-post-header>
+  </div>
+  <div>
+    <app-post [post]="post.sharedPost!" [footerFlag]="false"></app-post>
+  </div>
+  <div class="">
+    <app-post-footer [post]="post"></app-post-footer>
+  </div>
+</section>
