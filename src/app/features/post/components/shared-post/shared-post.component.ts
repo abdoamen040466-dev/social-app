@@ -11,9 +11,5 @@ import { PostFooterComponent } from '../post-footer/post-footer.component';
   styleUrl: './shared-post.component.css',
 })
 export class SharedPostComponent {
-  ngOnInit() {
-    console.log('Shared Post:', this.post);
-    console.log('Original Post:', this.post.sharedPost);
-  }
   @Input() post!: Post;
 }

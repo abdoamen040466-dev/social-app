@@ -20,36 +20,15 @@ export class PostHeaderComponent {
   isMenuOpened: boolean = false;
 
   savePost(): void {
-    this.postService.savePost(this.post._id).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.postService.savePost(this.post._id).subscribe();
   }
 
   sharePost(): void {
-    this.postService.sharePost(this.post._id).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.postService.sharePost(this.post._id).subscribe();
   }
 
   deletePost(): void {
-    this.postService.deletePost(this.post._id).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.postService.deletePost(this.post._id).subscribe();
   }
 
   isOwner(): boolean {

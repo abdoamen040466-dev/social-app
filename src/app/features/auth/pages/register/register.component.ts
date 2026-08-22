@@ -69,7 +69,6 @@ export class RegisterComponent {
       },
       error: (err) => {
         this.isLoading.set(false);
-        console.error(err.error.message);
         this.errorMessage.set(err.error.message);
       },
     });
