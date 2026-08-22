@@ -2,7 +2,6 @@ import { Component, inject, Input, signal } from '@angular/core';
 import { Post } from '../../../home/models/get-all-posts-response';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostService } from '../../services/post.service';
-import { User } from '../../../../core/models/user';
 
 @Component({
   selector: 'app-post-footer',
@@ -32,7 +31,6 @@ export class PostFooterComponent {
   toggleLike() {
     this.postService.Togglelike(this.post._id).subscribe({
       next: (res) => {
-        console.log(res);
         if (res.data.liked) {
           this.post.likesCount += 1;
           if (this.userId) {
@@ -46,9 +44,6 @@ export class PostFooterComponent {
             this.post.likes.splice(this.post.likes.indexOf(this.userId), 1);
           }
         }
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }

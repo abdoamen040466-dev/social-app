@@ -19,11 +19,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.homeService.getAllPosts().subscribe({
       next: (res) => {
-        console.log(res);
         this.posts.set(res.data.posts);
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }

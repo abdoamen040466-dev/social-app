@@ -38,7 +38,6 @@ export class LoginComponent {
     this.authService.login(this.loginForm.getRawValue() as LoginRequest).subscribe({
       next: (res) => {
         this.isLoading.set(false);
-        console.log(res);
         this.authStorage.saveToken(res.data.token);
         this.authStorage.saveUser(res.data.user);
         this.router.navigate(['/home']);
@@ -46,7 +45,6 @@ export class LoginComponent {
       error: (err) => {
         this.isLoading.set(false);
         this.errorMessage.set('incorrect email or password');
-        console.log(err);
       },
     });
   }
