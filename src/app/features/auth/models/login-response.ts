@@ -1,21 +1,14 @@
+import { User } from '../../../core/models/user';
+
 export interface LoginResponse {
   success: boolean;
   message: string;
   data: Data;
 }
 
-interface Data {
+export interface Data {
   token: string;
   tokenType: string;
   expiresIn: string;
   user: User;
-}
-
-interface User {
-  _id: string;
-  name: string;
-  username: string;
-  email: string;
-  photo: string;
-  cover: string;
 }

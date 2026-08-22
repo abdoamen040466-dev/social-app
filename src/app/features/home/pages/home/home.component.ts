@@ -1,9 +1,9 @@
 import { HomeService } from './../../services/home.service';
 import { Component, inject, OnInit, signal } from '@angular/core';
 
-import { PostComponent } from '../../components/post/Postcomponents/normalPost/post.component';
+import { PostComponent } from '../../../post/components/normalPost/post.component';
 import { Post } from '../../models/get-all-posts-response';
-import { SharedPostComponent } from '../../components/post/Postcomponents/shared-post/shared-post.component';
+import { SharedPostComponent } from '../../../post/components/shared-post/shared-post.component';
 
 @Component({
   selector: 'app-home',

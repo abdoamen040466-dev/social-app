@@ -1,3 +1,5 @@
+import { Post } from '../../home/models/get-all-posts-response';
+
 export interface ToggleLikeResponse {
   success: boolean;
   message: string;
@@ -8,20 +10,6 @@ interface Data {
   liked: boolean;
   likesCount: number;
   post: Post;
-}
-
-interface Post {
-  _id: string;
-  body: string;
-  image: string;
-  privacy: string;
-  user: User;
-  sharedPost: null;
-  likes: string[];
-  createdAt: string;
-  likesCount: number;
-  isShare: boolean;
-  id: string;
 }
 
 interface User {

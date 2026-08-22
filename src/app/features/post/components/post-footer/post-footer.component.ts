@@ -1,7 +1,8 @@
 import { Component, inject, Input, signal } from '@angular/core';
-import { Post } from '../../../../models/get-all-posts-response';
-import { AuthStorageService } from '../../../../../../core/auth/services/auth-storage.service';
+import { Post } from '../../../home/models/get-all-posts-response';
+import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostService } from '../../services/post.service';
+import { User } from '../../../../core/models/user';
 
 @Component({
   selector: 'app-post-footer',
@@ -19,25 +20,31 @@ export class PostFooterComponent {
   }
 
   liked = signal<boolean>(false);
+  userId: string | undefined = this.authService.getUser()?._id;
 
   userLiked(): boolean {
-    const userId = this.authService.getUser()?._id;
-    if (!userId) {
+    if (!this.userId) {
       return false;
     }
-    return this.post.likes.includes(userId);
+    return this.post.likes.includes(this.userId);
   }
 
   toggleLike() {
-    this.postService.TogglelikePost(this.post._id).subscribe({
+    this.postService.Togglelike(this.post._id).subscribe({
       next: (res) => {
         console.log(res);
         if (res.data.liked) {
           this.post.likesCount += 1;
+          if (this.userId) {
+            this.post.likes.push(this.userId);
+          }
           this.liked.set(true);
         } else {
           this.post.likesCount -= 1;
           this.liked.set(false);
+          if (this.userId) {
+            this.post.likes.splice(this.post.likes.indexOf(this.userId), 1);
+          }
         }
       },
       error: (err) => {

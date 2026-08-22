@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../../../environments/environment.development';
-import { AuthStorageService } from '../../../../../core/auth/services/auth-storage.service';
+import { environment } from '../../../../environments/environment.development';
+import { AuthStorageService } from '../../../core/auth/services/auth-storage.service';
 import { ToggleLikeResponse } from '../models/toggle-like-Response';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class PostService {
     Authorization: `Bearer ${this.authStorageService.getToken()}`,
   });
 
-  TogglelikePost(postId: string): Observable<ToggleLikeResponse> {
+  Togglelike(postId: string): Observable<ToggleLikeResponse> {
     return this.httpClient.put<ToggleLikeResponse>(
       `${environment.apiUrl}/posts/${postId}/like`,
       {},

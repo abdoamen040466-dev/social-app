@@ -1,6 +1,6 @@
-import { AuthStorageService } from '../../../../../../core/auth/services/auth-storage.service';
+import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostService } from '../../services/post.service';
-import { Post } from '../../../../models/get-all-posts-response';
+import { Post } from '../../../home/models/get-all-posts-response';
 import { Component, ElementRef, HostListener, inject, Input, ViewChild } from '@angular/core';
 
 @Component({
@@ -52,7 +52,7 @@ export class PostHeaderComponent {
     });
   }
 
-  isPostMine(): boolean {
+  isOwner(): boolean {
     return this.post.user._id === this.authService.getUser()?._id;
   }
 

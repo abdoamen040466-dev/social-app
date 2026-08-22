@@ -1,3 +1,5 @@
+import { User } from '../../../core/models/user';
+
 export interface AllPostsResponse {
   success: boolean;
   message: string;
@@ -39,39 +41,13 @@ export interface Post {
   bookmarked: boolean;
 }
 
-interface TopComment3 {
+interface TopComment {
   _id: string;
   content: string;
-  commentCreator: User;
-  post: string;
-  parentComment: null;
-  likes: any[];
-  createdAt: string;
-}
-
-interface TopComment2 {
-  _id: string;
-  content: string;
+  image: string;
   commentCreator: User;
   post: string;
   parentComment: null;
   likes: string[];
   createdAt: string;
-}
-
-interface TopComment {
-  _id: string;
-  image: string;
-  commentCreator: User;
-  post: string;
-  parentComment: null;
-  likes: any[];
-  createdAt: string;
-}
-
-interface User {
-  _id: string;
-  name: string;
-  username: string;
-  photo: string;
 }

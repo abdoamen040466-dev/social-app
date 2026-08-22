@@ -1,4 +1,4 @@
-import { Post } from '../../../../models/get-all-posts-response';
+import { Post } from '../../../home/models/get-all-posts-response';
 import {
   Component,
   ElementRef,
@@ -11,7 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { PostService } from '../../services/post.service';
-import { AuthStorageService } from '../../../../../../core/auth/services/auth-storage.service';
+import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostHeaderComponent } from '../post-header/post-header.component';
 import { PostFooterComponent } from '../post-footer/post-footer.component';
 
