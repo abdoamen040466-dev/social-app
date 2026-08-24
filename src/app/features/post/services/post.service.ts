@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { AuthStorageService } from '../../../core/auth/services/auth-storage.service';
 import { ToggleLikeResponse } from '../models/toggle-like-Response';
+import { CreatePostRequest } from '../models/create-post-request';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,8 @@ export class PostService {
 
   deletePost(postId: string): Observable<any> {
     return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}`);
+  }
+  createPost(post: CreatePostRequest): Observable<any> {
+    return this.httpClient.post(`${environment.apiUrl}/posts`, post);
   }
 }
