@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, inject, Output, ViewChild } from '
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../../home/models/get-all-posts-response';
-import { validate } from '@angular/forms/signals';
+import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 
 @Component({
   selector: 'app-create-post',
@@ -12,6 +12,7 @@ import { validate } from '@angular/forms/signals';
 })
 export class CreatePostComponent {
   private readonly postService = inject(PostService);
+  readonly user = inject(AuthStorageService).getUser();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @Output() childEvent = new EventEmitter<Post>();
@@ -56,9 +57,10 @@ export class CreatePostComponent {
           body: '',
           privacy: 'public',
         });
-        this.childEvent.emit(res.data.post);
+        // this.childEvent.emit(res.data.post);
 
         console.log(res);
+        this.getPost(res.data.post._id);
       },
       error: (err) => {
         console.log(err);
@@ -87,5 +89,17 @@ export class CreatePostComponent {
     this.selectedImage = null;
     this.imagePreview = null;
     this.fileInput.nativeElement.value = '';
+  }
+
+  getPost(postId: string) {
+    this.postService.getPost(postId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.childEvent.emit(res.data.post);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

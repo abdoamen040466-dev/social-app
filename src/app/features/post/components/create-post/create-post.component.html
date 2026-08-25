@@ -4,7 +4,7 @@
   <form [formGroup]="postForm" (ngSubmit)="createPost()">
     <header class="flex gap-4 items-start">
       <div class="image w-10">
-        <img src="/assets/default-profile.png" alt="" />
+        <img [src]="user?.photo || '/assets/default-profile.png'" alt="" />
       </div>
       <div class="w-fit flex flex-col items-center gap-2">
         <p class="font-bold">Abdallah Amin</p>
