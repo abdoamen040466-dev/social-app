@@ -1,41 +1,5 @@
 <main>
-  <section
-    class="bg-neutral-primary-soft max-w-4xl p-6 border border-default rounded-base shadow-xs m-auto mt-4"
-  >
-    <header class="flex gap-4 items-start">
-      <div class="image w-10">
-        <img src="/assets/default-profile.png" alt="" />
-      </div>
-      <div class="w-fit flex flex-col items-center gap-2">
-        <p class="font-bold">Abdallah Amin</p>
-        <div class="bg-mainColor text-gray-600 w-fit p-1 rounded-2xl flex gap-2 items-center">
-          <i class="fa-solid fa-earth-africa"></i>
-          <span>Public</span>
-          <i class="fa-solid fa-chevron-down"></i>
-        </div>
-      </div>
-    </header>
-    <div class="body mt-4">
-      <textarea
-        class="border-0 bg-mainColor rounded-2xl w-full min-h-32 text-2xl focus:outline-0 p-5 text-gray-600"
-        placeholder="What's in your mind Abdallah?"
-      >
-      </textarea>
-      <hr class="mt-4 h-0.5 bg-black" />
-    </div>
-    <footer class="flex items-center justify-between mt-4">
-      <div class="image flex items-center gap-2 cursor-pointer">
-        <i class="fa-solid fa-image"></i>
-        <p>Photo/Video</p>
-      </div>
-      <div class="py-3 px-6 bg-blue-600 w-fit rounded-xl text-white">
-        <button class="flex items-center gap-4 cursor-pointer">
-          <span class="text- font-bold">Post</span>
-          <i class="fa-solid fa-paper-plane"></i>
-        </button>
-      </div>
-    </footer>
-  </section>
+  <app-create-post (childEvent)="addNewPost($event)"></app-create-post>
   <section>
     @for (item of posts(); track item._id) {
       @if (item.isShare) {

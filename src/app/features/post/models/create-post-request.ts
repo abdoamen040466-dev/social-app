@@ -1,4 +1,5 @@
 export interface CreatePostRequest {
   body: string;
-  image: File;
+  image: File | null;
+  privacy: string;
 }

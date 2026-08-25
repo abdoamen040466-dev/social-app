@@ -1,0 +1,77 @@
+import { Component, ElementRef, EventEmitter, inject, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../../home/models/get-all-posts-response';
+import { validate } from '@angular/forms/signals';
+
+@Component({
+  selector: 'app-create-post',
+  imports: [ReactiveFormsModule],
+  templateUrl: './create-post.component.html',
+  styleUrl: './create-post.component.css',
+})
+export class CreatePostComponent {
+  private readonly postService = inject(PostService);
+
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  @Output() childEvent = new EventEmitter<Post>();
+
+  selectedImage: File | null = null;
+  imagePreview: string | null = null;
+
+  postForm = new FormGroup({
+    privacy: new FormControl('public'),
+    body: new FormControl('', [Validators.required]),
+  });
+
+  get form() {
+    return this.postForm.controls;
+  }
+
+  createPost() {
+    const post = this.postForm.getRawValue();
+    const formData = new FormData();
+    formData.append('body', post.body ?? '');
+    formData.append('privacy', post.privacy ?? 'public');
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+
+    this.postService.createPost(formData).subscribe({
+      next: (res) => {
+        if (this.imagePreview) {
+          URL.revokeObjectURL(this.imagePreview);
+        }
+        this.selectedImage = null;
+        this.imagePreview = null;
+        this.fileInput.nativeElement.value = '';
+        this.postForm.reset();
+        this.childEvent.emit(res.data.post);
+
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      return;
+    }
+    this.selectedImage = input.files[0];
+    this.imagePreview = URL.createObjectURL(this.selectedImage);
+  }
+
+  deleteImage() {
+    if (this.imagePreview) {
+      URL.revokeObjectURL(this.imagePreview);
+    }
+    this.selectedImage = null;
+    this.imagePreview = null;
+    this.fileInput.nativeElement.value = '';
+  }
+}

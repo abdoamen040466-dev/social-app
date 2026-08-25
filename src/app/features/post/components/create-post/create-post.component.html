@@ -1,0 +1,57 @@
+<section
+  class="bg-neutral-primary-soft max-w-4xl p-6 border border-default rounded-base shadow-xs m-auto mt-4"
+>
+  <form [formGroup]="postForm" (ngSubmit)="createPost()">
+    <header class="flex gap-4 items-start">
+      <div class="image w-10">
+        <img src="/assets/default-profile.png" alt="" />
+      </div>
+      <div class="w-fit flex flex-col items-center gap-2">
+        <p class="font-bold">Abdallah Amin</p>
+        <div class="bg-mainColor text-gray-600 w-fit p-1 rounded-2xl flex gap-2 items-center">
+          <i class="fa-solid fa-earth-africa"></i>
+          <select class="bg-mainColor border-0 focus:ring-0" formControlName="privacy">
+            <option value="public">public</option>
+            <option value="following">following</option>
+            <option value="only_me">only me</option>
+          </select>
+        </div>
+      </div>
+    </header>
+    <div class="body mt-4">
+      <textarea
+        formControlName="body"
+        class="border-0 bg-mainColor rounded-2xl w-full min-h-32 text-2xl focus:ring-0 p-5 text-gray-600"
+        placeholder="What's in your mind Abdallah?"
+      >
+      </textarea>
+      <hr class="mt-4 h-0.5 bg-black" />
+    </div>
+    <footer class="mt-4">
+      <input type="file" accept="image/*" #fileInput hidden (change)="onFileSelected($event)" />
+      <div class="flex items-center justify-between">
+        <div class="image flex items-center gap-2 cursor-pointer" (click)="fileInput.click()">
+          <i class="fa-solid fa-image"></i>
+          <p>Photo/Video</p>
+        </div>
+        <div class="py-3 px-6 bg-blue-600 w-fit rounded-xl text-white">
+          <button type="submit" class="flex items-center gap-4 cursor-pointer">
+            <span class="text- font-bold">Post</span>
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+      @if (imagePreview) {
+        <div class="w-48 max-w-fit m-auto mt-4 flex flex-col items-center">
+          <img [src]="imagePreview" alt="" />
+          <div
+            class="py-2 px-4 mt-2 bg-red-600 w-fit rounded-xl text-white cursor-pointer"
+            (click)="deleteImage()"
+          >
+            <p>Delete Image</p>
+          </div>
+        </div>
+      }
+    </footer>
+  </form>
+</section>
