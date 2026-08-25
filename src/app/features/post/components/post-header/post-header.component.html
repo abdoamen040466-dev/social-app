@@ -1,7 +1,11 @@
 <header class="flex justify-between items-center">
   <div class="left flex items-center gap-2">
     <div class="image">
-      <img [src]="post.user.photo" alt="" class="w-10 h-10 rounded-full object-cover" />
+      <img
+        [src]="post.user.photo || 'assets/default-profile.png'"
+        alt=""
+        class="w-10 h-10 rounded-full object-cover"
+      />
     </div>
     <div>
       <h2 class="font-bold">{{ post.user.name }}</h2>

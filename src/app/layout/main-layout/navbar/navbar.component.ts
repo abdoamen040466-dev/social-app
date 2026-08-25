@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, inject, ViewChild } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { AuthStorageService } from '../../../core/auth/services/auth-storage.service';
 
@@ -11,7 +11,7 @@ import { AuthStorageService } from '../../../core/auth/services/auth-storage.ser
 })
 export class NavbarComponent {
   private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
+  readonly photo = inject(AuthStorageService).getUser()?.photo;
 
   isMenuOpened: boolean = false;
   isAvatarOpened: boolean = false;
@@ -19,13 +19,7 @@ export class NavbarComponent {
   @ViewChild('avatar') avatar!: ElementRef;
 
   @HostListener('document:click', ['$event']) onClick(event: MouseEvent) {
-    // console.log(event.target);
-    // console.log(this.menu.nativeElement);
-    // console.log(this.avatar.nativeElement);
-
     const target = event.target as Node;
-    // console.log(this.menu.nativeElement.contains(target));
-    // console.log(this.avatar.nativeElement.contains(target));
 
     if (this.menu.nativeElement.contains(target)) {
       this.isMenuOpened = !this.isMenuOpened;
@@ -41,6 +35,5 @@ export class NavbarComponent {
 
   signOut(): void {
     this.authService.signout();
-    this.router.navigate(['/login']);
   }
 }

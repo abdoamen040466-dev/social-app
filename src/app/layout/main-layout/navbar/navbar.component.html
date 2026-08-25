@@ -1,5 +1,5 @@
 <section class="bg-white sticky shadow-sm top-0 z-50">
-  <nav class="max-w-7xl mx-auto flex justify-between px-4 py-2 items-center">
+  <nav class="mx-auto flex justify-between px-4 py-2 items-center">
     <div class="flex gap-3 items-center">
       <div class="logo">
         <img src="/assets/route.png" alt="" class="w-10 h-10 rounded-full object-cover" />
@@ -47,7 +47,11 @@
       </div>
 
       <div #avatar class="relative cursor-pointer">
-        <img src="/assets/default-profile.png" alt="" class="w-10 h-10 rounded-full object-cover" />
+        <img
+          [src]="photo || 'assets/default-profile.png'"
+          alt=""
+          class="w-10 h-10 rounded-full object-cover"
+        />
         <div
           [hidden]="!isAvatarOpened"
           class="avaterMenu text-[13px] md:text-lg absolute border-2 border-gray-500 bg-mainColor top-17 left-1/2 -translate-x-1/2 rounded-md p-1"

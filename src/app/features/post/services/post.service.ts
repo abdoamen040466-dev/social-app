@@ -1,16 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
-import { AuthStorageService } from '../../../core/auth/services/auth-storage.service';
 import { ToggleLikeResponse } from '../models/toggle-like-Response';
+import { CreatePostResponse } from '../models/create-post-response';
+import { GetSinglePost } from '../models/get-single-post';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
   private readonly httpClient = inject(HttpClient);
-  private readonly authStorageService = inject(AuthStorageService);
 
   Togglelike(postId: string): Observable<ToggleLikeResponse> {
     return this.httpClient.put<ToggleLikeResponse>(
@@ -29,5 +29,12 @@ export class PostService {
 
   deletePost(postId: string): Observable<any> {
     return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}`);
+  }
+  createPost(post: FormData): Observable<CreatePostResponse> {
+    return this.httpClient.post<CreatePostResponse>(`${environment.apiUrl}/posts`, post);
+  }
+
+  getPost(postId: string): Observable<GetSinglePost> {
+    return this.httpClient.get<GetSinglePost>(`${environment.apiUrl}/posts/${postId}`);
   }
 }
