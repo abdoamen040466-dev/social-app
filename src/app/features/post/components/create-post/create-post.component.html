@@ -25,6 +25,9 @@
         placeholder="What's in your mind Abdallah?"
       >
       </textarea>
+      @if (form.body.invalid && submitted) {
+        <span class="text-red-700">body of post is required</span>
+      }
       <hr class="mt-4 h-0.5 bg-black" />
     </div>
     <footer class="mt-4">

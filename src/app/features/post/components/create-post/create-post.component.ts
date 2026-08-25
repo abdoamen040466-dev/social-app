@@ -27,8 +27,15 @@ export class CreatePostComponent {
   get form() {
     return this.postForm.controls;
   }
+  submitted: boolean = false;
 
   createPost() {
+    if (this.postForm.invalid) {
+      this.postForm.markAllAsTouched();
+      this.submitted = true;
+      return;
+    }
+
     const post = this.postForm.getRawValue();
     const formData = new FormData();
     formData.append('body', post.body ?? '');
@@ -45,7 +52,10 @@ export class CreatePostComponent {
         this.selectedImage = null;
         this.imagePreview = null;
         this.fileInput.nativeElement.value = '';
-        this.postForm.reset();
+        this.postForm.reset({
+          body: '',
+          privacy: 'public',
+        });
         this.childEvent.emit(res.data.post);
 
         console.log(res);
@@ -62,6 +72,10 @@ export class CreatePostComponent {
     if (!input.files || input.files.length === 0) {
       return;
     }
+    if (this.imagePreview) {
+      URL.revokeObjectURL(this.imagePreview);
+    }
+
     this.selectedImage = input.files[0];
     this.imagePreview = URL.createObjectURL(this.selectedImage);
   }
