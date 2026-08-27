@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PostComponent } from '../normal-post/post.component';
 import { Post } from '../../../home/models/get-all-posts-response';
 import { PostHeaderComponent } from '../post-header/post-header.component';
@@ -12,4 +12,9 @@ import { PostFooterComponent } from '../post-footer/post-footer.component';
 })
 export class SharedPostComponent {
   @Input() post!: Post;
+  @Output() PostDeletedId = new EventEmitter<string>();
+
+  SendDeletedPostId(id: string): void {
+    this.PostDeletedId.emit(id);
+  }
 }

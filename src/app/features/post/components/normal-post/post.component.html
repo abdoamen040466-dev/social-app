@@ -6,6 +6,7 @@
       @if (post.body || post.image || post.sharedPost) {
         <app-post-header
           (postShared)="addSharedPost($event)"
+          (postDeleted)="SendDeletedPostId($event)"
           [post]="post"
           [isShared]="false"
         ></app-post-header>
