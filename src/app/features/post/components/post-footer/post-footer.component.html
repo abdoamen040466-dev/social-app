@@ -10,8 +10,18 @@
   </div>
   <div class="flex gap-2 items-center">
     <p class="font-light text-gray-600">{{ post.sharesCount }} shares</p>
-    <p class="font-light text-gray-600">{{ post.commentsCount }} comments</p>
+    @if (post.commentsCount > 0) {
+      <button (click)="getAllComments(post._id)" class="font-light text-gray-600 cursor-pointer">
+        {{ post.commentsCount }} comments
+      </button>
+    } @else {
+      <p class="font-light text-gray-600 cursor-pointer">{{ post.commentsCount }} comments</p>
+    }
     <p class="text-blue-600 font-medium">view details</p>
   </div>
 </div>
-<app-comment></app-comment>
+@if (post.commentsCount > 0 && commentsVisible()) {
+  @for (item of comments(); track item._id) {
+    <app-comment [comment]="item"></app-comment>
+  }
+}

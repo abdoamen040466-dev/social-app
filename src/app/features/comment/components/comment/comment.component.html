@@ -1,15 +1,14 @@
-<section class="ms-4">
-  <hr class="my-2" />
+<section class="ms-4 my-3">
   <div class="">
     <div class="flex justify-between items-center">
-      <div class="flex gap-2 my-3 items-center">
-        <img src="assets/default-profile.png" class="w-8" alt="" />
-        <p class="font-bold">Abdallah Amin</p>
+      <div class="flex gap-2 my-1 items-center">
+        <img [src]="comment.commentCreator.photo || '/default-profile.png'" class="w-8" alt="" />
+        <p class="font-bold">{{ comment.commentCreator.name }}</p>
       </div>
       <i class="fa-solid fa-ellipsis-vertical"></i>
     </div>
     <div class="">
-      <p class="font-medium px-10">This is my comment</p>
+      <p class="font-medium px-10 ms-4">{{ comment.content }}</p>
     </div>
     <div class="ms-10 flex gap-2 mt-1">
       <button type="button" class="cursor-pointer">Like</button>

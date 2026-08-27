@@ -3,6 +3,8 @@ import { Post } from '../../../home/models/get-all-posts-response';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostService } from '../../services/post.service';
 import { CommentComponent } from '../../../comment/components/comment/comment.component';
+import { CommentsService } from '../../services/comments.service';
+import { Comment } from '../../models/get-all-comments-response';
 
 @Component({
   selector: 'app-post-footer',
@@ -13,6 +15,7 @@ import { CommentComponent } from '../../../comment/components/comment/comment.co
 export class PostFooterComponent {
   private readonly authService = inject(AuthStorageService);
   private readonly postService = inject(PostService);
+  private readonly commentsService = inject(CommentsService);
 
   @Input() post!: Post;
   ngOnInit(): void {
@@ -21,6 +24,9 @@ export class PostFooterComponent {
 
   liked = signal<boolean>(false);
   userId: string | undefined = this.authService.getUser()?._id;
+  comments = signal<Comment[] | null>(null);
+  commentsVisible = signal(false);
+  commentsLoaded = signal(false);
 
   userLiked(): boolean {
     if (!this.userId) {
@@ -45,6 +51,27 @@ export class PostFooterComponent {
             this.post.likes.splice(this.post.likes.indexOf(this.userId), 1);
           }
         }
+      },
+    });
+  }
+
+  getAllComments(id: string) {
+    if (this.commentsVisible()) {
+      this.commentsVisible.set(false);
+      return;
+    }
+
+    if (this.commentsLoaded()) {
+      this.commentsVisible.set(true);
+      return;
+    }
+
+    this.commentsService.getAllComments(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.comments.set(res.data.comments);
+        this.commentsVisible.set(true);
+        this.commentsLoaded.set(true);
       },
     });
   }
