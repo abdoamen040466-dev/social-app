@@ -2,10 +2,11 @@ import { Component, inject, Input, signal } from '@angular/core';
 import { Post } from '../../../home/models/get-all-posts-response';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostService } from '../../services/post.service';
+import { CommentComponent } from '../../../comment/components/comment/comment.component';
 
 @Component({
   selector: 'app-post-footer',
-  imports: [],
+  imports: [CommentComponent],
   templateUrl: './post-footer.component.html',
   styleUrl: './post-footer.component.css',
 })
