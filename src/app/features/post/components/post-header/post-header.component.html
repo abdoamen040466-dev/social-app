@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div #menu [hidden]="isShared" class="icon relative">
+  <div #menu class="icon relative">
     <i class="fa-solid fa-ellipsis-vertical text-xl"></i>
     <div
       [hidden]="!isMenuOpened"
@@ -27,16 +27,23 @@
           class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
         ></i>
         @if (isOwner()) {
-          <li class="pb-2 hover:text-blue-700 cursor-pointer">Edit</li>
+          <li (click)="deletePost()" class="pb-2 hover:text-blue-700 cursor-pointer">Delete</li>
           <li
-            (click)="deletePost()"
-            class="pb-2 hover:text-blue-700 cursor-pointer border-y border-t-black"
+            [hidden]="isShared"
+            class="pb-2 hover:text-blue-700 border-y border-t-black cursor-pointer"
           >
-            Delete
+            Edit
           </li>
         }
-        <li (click)="savePost()" class="pb-2 hover:text-blue-700 cursor-pointer">Save</li>
         <li
+          [hidden]="isShared"
+          (click)="savePost()"
+          class="pb-2 hover:text-blue-700 cursor-pointer"
+        >
+          Save
+        </li>
+        <li
+          [hidden]="isShared"
           (click)="sharePost()"
           class="pb-2 hover:text-blue-700 cursor-pointer border-t border-t-black"
         >

@@ -1,7 +1,16 @@
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../../home/models/get-all-posts-response';
-import { Component, ElementRef, HostListener, inject, Input, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-post-header',
@@ -15,6 +24,8 @@ export class PostHeaderComponent {
 
   @Input() post!: Post;
   @Input() isShared!: boolean;
+  @Output() postShared = new EventEmitter<Post>();
+
   @ViewChild('menu') menu!: ElementRef;
 
   isMenuOpened: boolean = false;
@@ -24,7 +35,12 @@ export class PostHeaderComponent {
   }
 
   sharePost(): void {
-    this.postService.sharePost(this.post._id).subscribe();
+    this.postService.sharePost(this.post._id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.postShared.emit(res.data.post);
+      },
+    });
   }
 
   deletePost(): void {

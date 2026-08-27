@@ -4,7 +4,11 @@
   >
     <main>
       @if (post.body || post.image || post.sharedPost) {
-        <app-post-header [post]="post" [isShared]="false"></app-post-header>
+        <app-post-header
+          (postShared)="addSharedPost($event)"
+          [post]="post"
+          [isShared]="false"
+        ></app-post-header>
         <p class="text-[17px]">{{ post.body }}</p>
         @if (post.image) {
           <div class="image mt-4">
