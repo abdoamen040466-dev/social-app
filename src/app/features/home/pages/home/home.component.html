@@ -2,7 +2,7 @@
   <app-create-post (childEvent)="addNewPost($event)"></app-create-post>
   <section>
     @for (item of posts(); track item._id) {
-      @if (item.isShare) {
+      @if (item.isShare || (!item.body && !item.image && !item.sharedPost)) {
         <app-shared-post [post]="item"></app-shared-post>
       } @else {
         <app-post [post]="item"></app-post>

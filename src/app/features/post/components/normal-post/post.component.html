@@ -2,13 +2,19 @@
   <div
     class="bg-neutral-primary-soft flex flex-col gap-7 max-w-4xl p-6 border border-default rounded-base shadow-xs m-auto"
   >
-    <app-post-header [post]="post" [isShared]="false"></app-post-header>
     <main>
-      <p class="text-[17px]">{{ post.body }}</p>
-      @if (post.image) {
-        <div class="image mt-4">
-          <img [src]="post.image" width="100%" alt="" />
-        </div>
+      @if (post.body || post.image || post.sharedPost) {
+        <app-post-header [post]="post" [isShared]="false"></app-post-header>
+        <p class="text-[17px]">{{ post.body }}</p>
+        @if (post.image) {
+          <div class="image mt-4">
+            <img [src]="post.image" width="100%" alt="" />
+          </div>
+        }
+      } @else {
+        <p class="text-center bg-mainColor rounded-xl py-2 text-xl">
+          This post is no longer available.
+        </p>
       }
     </main>
     @if (footerFlag) {
