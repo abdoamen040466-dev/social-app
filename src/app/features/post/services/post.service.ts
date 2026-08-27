@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment.development';
 import { ToggleLikeResponse } from '../models/toggle-like-Response';
 import { CreatePostResponse } from '../models/create-post-response';
 import { GetSinglePost } from '../models/get-single-post';
+import { SharePostResponse } from '../models/share-post-response';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +24,11 @@ export class PostService {
     return this.httpClient.put(`${environment.apiUrl}/posts/${postId}/bookmark`, {});
   }
 
-  sharePost(postId: string): Observable<any> {
-    return this.httpClient.post(`${environment.apiUrl}/posts/${postId}/share`, {});
+  sharePost(postId: string): Observable<SharePostResponse> {
+    return this.httpClient.post<SharePostResponse>(
+      `${environment.apiUrl}/posts/${postId}/share`,
+      {},
+    );
   }
 
   deletePost(postId: string): Observable<any> {

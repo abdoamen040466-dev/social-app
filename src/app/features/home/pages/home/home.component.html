@@ -5,7 +5,7 @@
       @if (item.isShare || (!item.body && !item.image && !item.sharedPost)) {
         <app-shared-post [post]="item"></app-shared-post>
       } @else {
-        <app-post [post]="item"></app-post>
+        <app-post (postShared)="addNewPost($event)" [post]="item"></app-post>
       }
     }
   </section>

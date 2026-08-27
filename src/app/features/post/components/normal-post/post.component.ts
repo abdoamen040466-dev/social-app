@@ -2,10 +2,12 @@ import { Post } from '../../../home/models/get-all-posts-response';
 import {
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   inject,
   Input,
   OnInit,
+  Output,
   signal,
   ViewChild,
   viewChild,
@@ -27,4 +29,11 @@ export class PostComponent {
 
   @Input() post!: Post;
   @Input() footerFlag: boolean = true;
+
+  @Output() postShared = new EventEmitter<Post>();
+
+  addSharedPost(post: Post): void {
+    console.log('SharedPost received:', post);
+    this.postShared.emit(post);
+  }
 }
