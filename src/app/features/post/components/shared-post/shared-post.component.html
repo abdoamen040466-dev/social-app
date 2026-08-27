@@ -5,7 +5,11 @@
     <app-post-header [post]="post!" [isShared]="true"></app-post-header>
   </div>
   <div>
-    <app-post [post]="post.sharedPost!" [footerFlag]="false"></app-post>
+    @if (!post.sharedPost) {
+      <app-post [post]="post" [footerFlag]="false"></app-post>
+    } @else {
+      <app-post [post]="post.sharedPost" [footerFlag]="false"></app-post>
+    }
   </div>
   <div class="">
     <app-post-footer [post]="post"></app-post-footer>
