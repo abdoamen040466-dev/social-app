@@ -3,9 +3,13 @@
   <section>
     @for (item of posts(); track item._id) {
       @if (item.isShare || (!item.body && !item.image && !item.sharedPost)) {
-        <app-shared-post [post]="item"></app-shared-post>
+        <app-shared-post (PostDeletedId)="removePost($event)" [post]="item"></app-shared-post>
       } @else {
-        <app-post (postShared)="addNewPost($event)" [post]="item"></app-post>
+        <app-post
+          (postShared)="addNewPost($event)"
+          (PostDeletedId)="removePost($event)"
+          [post]="item"
+        ></app-post>
       }
     }
   </section>

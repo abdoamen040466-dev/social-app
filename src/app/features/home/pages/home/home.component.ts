@@ -21,6 +21,10 @@ export class HomeComponent implements OnInit {
     this.posts.update((posts) => [post, ...posts]);
   }
 
+  removePost(id: string) {
+    this.posts.update((posts) => posts.filter((post) => post._id !== id));
+  }
+
   ngOnInit(): void {
     this.homeService.getAllPosts().subscribe({
       next: (res) => {

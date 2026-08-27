@@ -6,6 +6,7 @@ import { ToggleLikeResponse } from '../models/toggle-like-Response';
 import { CreatePostResponse } from '../models/create-post-response';
 import { GetSinglePost } from '../models/get-single-post';
 import { SharePostResponse } from '../models/share-post-response';
+import { DeletePostResponse } from '../models/delete-post-response';
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +32,8 @@ export class PostService {
     );
   }
 
-  deletePost(postId: string): Observable<any> {
-    return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}`);
+  deletePost(postId: string): Observable<DeletePostResponse> {
+    return this.httpClient.delete<DeletePostResponse>(`${environment.apiUrl}/posts/${postId}`);
   }
   createPost(post: FormData): Observable<CreatePostResponse> {
     return this.httpClient.post<CreatePostResponse>(`${environment.apiUrl}/posts`, post);

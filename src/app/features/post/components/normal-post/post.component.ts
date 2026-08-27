@@ -31,9 +31,13 @@ export class PostComponent {
   @Input() footerFlag: boolean = true;
 
   @Output() postShared = new EventEmitter<Post>();
+  @Output() PostDeletedId = new EventEmitter<string>();
 
   addSharedPost(post: Post): void {
-    console.log('SharedPost received:', post);
     this.postShared.emit(post);
+  }
+
+  SendDeletedPostId(id: string): void {
+    this.PostDeletedId.emit(id);
   }
 }

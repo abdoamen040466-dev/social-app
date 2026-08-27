@@ -25,6 +25,7 @@ export class PostHeaderComponent {
   @Input() post!: Post;
   @Input() isShared!: boolean;
   @Output() postShared = new EventEmitter<Post>();
+  @Output() postDeleted = new EventEmitter<string>();
 
   @ViewChild('menu') menu!: ElementRef;
 
@@ -37,14 +38,18 @@ export class PostHeaderComponent {
   sharePost(): void {
     this.postService.sharePost(this.post._id).subscribe({
       next: (res) => {
-        console.log(res);
         this.postShared.emit(res.data.post);
       },
     });
   }
 
   deletePost(): void {
-    this.postService.deletePost(this.post._id).subscribe();
+    this.postService.deletePost(this.post._id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.postDeleted.emit(res.data.post._id);
+      },
+    });
   }
 
   isOwner(): boolean {
