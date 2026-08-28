@@ -11,10 +11,17 @@
       <p class="font-medium px-10 ms-4">{{ comment.content }}</p>
     </div>
     <div class="ms-10 flex gap-2 mt-1">
-      <button type="button" class="cursor-pointer">Like</button>
+      <button
+        (click)="toggleLikeComment(comment.post, comment._id)"
+        type="button"
+        [class.text-blue-600]="likedComment()"
+        [class.text-black]="!likedComment()"
+        class="cursor-pointer"
+      >
+        {{ comment.likes.length }} Like
+      </button>
       <span>|</span>
       <button type="button" class="cursor-pointer">Reply</button>
     </div>
   </div>
-  <div class=""></div>
 </section>

@@ -5,6 +5,7 @@ import { PostService } from '../../services/post.service';
 import { CommentComponent } from '../../../comment/components/comment/comment.component';
 import { CommentsService } from '../../services/comments.service';
 import { Comment } from '../../models/get-all-comments-response';
+import { CommentService } from '../../../comment/services/comment.service';
 
 @Component({
   selector: 'app-post-footer',
@@ -19,10 +20,10 @@ export class PostFooterComponent {
 
   @Input() post!: Post;
   ngOnInit(): void {
-    this.liked.set(this.userLiked());
+    this.likedPost.set(this.userLiked());
   }
 
-  liked = signal<boolean>(false);
+  likedPost = signal<boolean>(false);
   userId: string | undefined = this.authService.getUser()?._id;
   comments = signal<Comment[] | null>(null);
   commentsVisible = signal(false);
@@ -35,7 +36,7 @@ export class PostFooterComponent {
     return this.post.likes.includes(this.userId);
   }
 
-  toggleLike() {
+  toggleLikePost() {
     this.postService.Togglelike(this.post._id).subscribe({
       next: (res) => {
         if (res.data.liked) {
@@ -43,10 +44,10 @@ export class PostFooterComponent {
           if (this.userId) {
             this.post.likes.push(this.userId);
           }
-          this.liked.set(true);
+          this.likedPost.set(true);
         } else {
           this.post.likesCount -= 1;
-          this.liked.set(false);
+          this.likedPost.set(false);
           if (this.userId) {
             this.post.likes.splice(this.post.likes.indexOf(this.userId), 1);
           }

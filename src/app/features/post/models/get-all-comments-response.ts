@@ -25,8 +25,8 @@ export interface Comment {
   content: string;
   commentCreator: CommentCreator;
   post: string;
-  parentComment: null;
-  likes: any[];
+  parentComment: Comment;
+  likes: string[];
   createdAt: string;
   repliesCount: number;
 }

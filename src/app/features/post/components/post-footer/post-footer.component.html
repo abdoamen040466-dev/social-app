@@ -1,9 +1,9 @@
 <div class="flex justify-between items-center">
   <div class="flex gap-2 items-center">
     <i
-      (click)="toggleLike()"
-      [class.text-blue-600]="liked()"
-      [class.text-black]="!liked()"
+      (click)="toggleLikePost()"
+      [class.text-blue-600]="likedPost()"
+      [class.text-black]="!likedPost()"
       class="fa-solid fa-thumbs-up"
     ></i>
     <span class="font-light text-gray-500">{{ post.likesCount }} likes</span>
