@@ -2,10 +2,11 @@ import { Component, inject, Input, input, signal } from '@angular/core';
 import { Comment } from '../../../post/models/get-all-comments-response';
 import { CommentService } from '../../services/comment.service';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
+import { CreateCommentComponent } from '../create-comment/create-comment.component';
 
 @Component({
   selector: 'app-comment',
-  imports: [],
+  imports: [CreateCommentComponent],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css',
 })

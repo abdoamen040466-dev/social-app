@@ -6,10 +6,11 @@ import { CommentComponent } from '../../../comment/components/comment/comment.co
 import { CommentsService } from '../../services/comments.service';
 import { Comment } from '../../models/get-all-comments-response';
 import { CommentService } from '../../../comment/services/comment.service';
+import { CreateCommentComponent } from '../../../comment/components/create-comment/create-comment.component';
 
 @Component({
   selector: 'app-post-footer',
-  imports: [CommentComponent],
+  imports: [CommentComponent, CreateCommentComponent],
   templateUrl: './post-footer.component.html',
   styleUrl: './post-footer.component.css',
 })
@@ -23,11 +24,16 @@ export class PostFooterComponent {
     this.likedPost.set(this.userLiked());
   }
 
-  likedPost = signal<boolean>(false);
   userId: string | undefined = this.authService.getUser()?._id;
+  likedPost = signal<boolean>(false);
   comments = signal<Comment[] | null>(null);
   commentsVisible = signal(false);
   commentsLoaded = signal(false);
+  createCommentflag: boolean = false;
+
+  showCreateComment(): void {
+    this.createCommentflag = !this.createCommentflag;
+  }
 
   userLiked(): boolean {
     if (!this.userId) {

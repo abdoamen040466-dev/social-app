@@ -29,6 +29,7 @@ export interface Comment {
   likes: string[];
   createdAt: string;
   repliesCount: number;
+  image: string;
 }
 
 interface CommentCreator {

@@ -7,8 +7,11 @@
       </div>
       <i class="fa-solid fa-ellipsis-vertical"></i>
     </div>
-    <div class="">
-      <p class="font-medium px-10 ms-4">{{ comment.content }}</p>
+    <div class="px-10 ms-4">
+      <p class="font-medium">{{ comment.content }}</p>
+      @if (comment.image) {
+        <img [src]="comment.image" class="mt-2 w-52" alt="" />
+      }
     </div>
     <div class="ms-10 flex gap-2 mt-1">
       <button
