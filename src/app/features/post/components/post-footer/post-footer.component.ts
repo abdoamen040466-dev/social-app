@@ -37,6 +37,13 @@ export class PostFooterComponent {
     this.commentsVisible.set(true);
   }
 
+  deleteComment(deletedComment: Comment) {
+    // this.posts.update((posts) => posts.filter((post) => post._id !== id));
+    this.comments.update((comments) =>
+      comments.filter((comment) => comment._id !== deletedComment._id),
+    );
+  }
+
   showCreateComment(): void {
     this.createCommentflag = !this.createCommentflag;
   }

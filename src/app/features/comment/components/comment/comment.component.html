@@ -5,7 +5,25 @@
         <img [src]="comment.commentCreator.photo || '/default-profile.png'" class="w-8" alt="" />
         <p class="font-bold">{{ comment.commentCreator.name }}</p>
       </div>
-      <i class="fa-solid fa-ellipsis-vertical"></i>
+      @if (isOwner()) {
+        <div #menu class="icon relative">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+          <div
+            [hidden]="!isMenuOpened"
+            class="avaterMenu text-[13px] md:text-lg absolute border-2 border-gray-500 bg-mainColor top-10 left-1/2 -translate-x-1/2 rounded-md p-1"
+          >
+            <ul class="relative px-5">
+              <i
+                class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
+              ></i>
+              <li (click)="deleteComment()" class="pb-2 hover:text-blue-700 cursor-pointer">
+                Delete
+              </li>
+              <li class="pb-2 hover:text-blue-700 border-t border-t-black cursor-pointer">Edit</li>
+            </ul>
+          </div>
+        </div>
+      }
     </div>
     <div class="px-10 ms-4">
       <p class="font-medium">{{ comment.content }}</p>

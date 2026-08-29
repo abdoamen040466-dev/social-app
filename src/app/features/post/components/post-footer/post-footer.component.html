@@ -31,6 +31,10 @@
 }
 @if (post.commentsCount > 0 && commentsVisible()) {
   @for (item of comments(); track item._id) {
-    <app-comment [comment]="item"></app-comment>
+    <app-comment
+      (deletedComment)="deleteComment($event)"
+      [comment]="item"
+      [post]="post"
+    ></app-comment>
   }
 }

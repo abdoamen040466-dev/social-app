@@ -1,12 +1,23 @@
-import { Component, inject, Input, input, signal } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  input,
+  Output,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { Comment } from '../../../post/models/get-all-comments-response';
 import { CommentService } from '../../services/comment.service';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
-import { CreateCommentComponent } from '../create-comment/create-comment.component';
+import { Post } from '../../../home/models/get-all-posts-response';
 
 @Component({
   selector: 'app-comment',
-  imports: [CreateCommentComponent],
+  imports: [],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css',
 })
@@ -19,8 +30,19 @@ export class CommentComponent {
   }
 
   @Input() comment!: Comment;
+  @Input() post!: Post;
+  @Output() deletedComment = new EventEmitter<Comment>();
+
+  @ViewChild('menu') menu!: ElementRef;
+
+  isMenuOpened: boolean = false;
+
   likedComment = signal<boolean>(false);
   userId: string | undefined = this.authService.getUser()?._id;
+
+  isOwner(): boolean {
+    return this.comment.commentCreator._id === this.authService.getUser()?._id;
+  }
 
   userLiked(): boolean {
     if (!this.userId) {
@@ -41,5 +63,22 @@ export class CommentComponent {
         }
       },
     });
+  }
+
+  deleteComment() {
+    this.commentService.deleteComment(this.post._id, this.comment._id).subscribe({
+      next: () => {
+        this.deletedComment.emit(this.comment);
+      },
+    });
+  }
+
+  @HostListener('document:click', ['$event']) onClick(evenet: MouseEvent) {
+    const target = evenet.target as Node;
+    if (this.menu.nativeElement.contains(target)) {
+      this.isMenuOpened = !this.isMenuOpened;
+    } else {
+      this.isMenuOpened = false;
+    }
   }
 }

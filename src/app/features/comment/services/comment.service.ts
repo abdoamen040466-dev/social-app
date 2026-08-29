@@ -24,4 +24,8 @@ export class CommentService {
       comment,
     );
   }
+
+  deleteComment(postId: string, commentId: string): Observable<any> {
+    return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}/comments/${commentId}`);
+  }
 }
