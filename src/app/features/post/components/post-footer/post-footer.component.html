@@ -27,7 +27,7 @@
   </div>
 </div>
 @if (createCommentflag) {
-  <app-create-comment></app-create-comment>
+  <app-create-comment (newComment)="addNewComment($event)" [post]="post"></app-create-comment>
 }
 @if (post.commentsCount > 0 && commentsVisible()) {
   @for (item of comments(); track item._id) {

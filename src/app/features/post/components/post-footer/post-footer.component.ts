@@ -5,7 +5,6 @@ import { PostService } from '../../services/post.service';
 import { CommentComponent } from '../../../comment/components/comment/comment.component';
 import { CommentsService } from '../../services/comments.service';
 import { Comment } from '../../models/get-all-comments-response';
-import { CommentService } from '../../../comment/services/comment.service';
 import { CreateCommentComponent } from '../../../comment/components/create-comment/create-comment.component';
 
 @Component({
@@ -26,10 +25,17 @@ export class PostFooterComponent {
 
   userId: string | undefined = this.authService.getUser()?._id;
   likedPost = signal<boolean>(false);
-  comments = signal<Comment[] | null>(null);
+  comments = signal<Comment[]>([]);
   commentsVisible = signal(false);
   commentsLoaded = signal(false);
   createCommentflag: boolean = false;
+
+  addNewComment(comment: Comment) {
+    this.comments.update((comments) => [comment, ...comments]);
+    this.post.commentsCount += 1;
+    this.commentsLoaded.set(true);
+    this.commentsVisible.set(true);
+  }
 
   showCreateComment(): void {
     this.createCommentflag = !this.createCommentflag;
@@ -75,7 +81,6 @@ export class PostFooterComponent {
 
     this.commentsService.getAllComments(id).subscribe({
       next: (res) => {
-        console.log(res);
         this.comments.set(res.data.comments);
         this.commentsVisible.set(true);
         this.commentsLoaded.set(true);

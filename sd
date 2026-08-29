@@ -1,0 +1,52 @@
+[33mec48d80[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeat/comments[m[33m, [m[1;31morigin/feat/comments[m[33m)[m feat: create Add comment ui
+[33mff036f1[m feat: add comment like
+[33m7cd6448[m feat: add comments display
+[33m4aed2d9[m feat: comment UI
+[33m01d2c3f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #18 from abdoamen040466-dev/fix/deleted-shared-post
+[33m2ef3ae0[m[33m ([m[1;31morigin/fix/deleted-shared-post[m[33m)[m fix: update posts after delete
+[33md5e0f7d[m Merge pull request #17 from abdoamen040466-dev/fix/deleted-shared-post
+[33m2b5eb39[m fix: update posts after sharing
+[33m9771ebb[m Merge pull request #16 from abdoamen040466-dev/fix/deleted-shared-post
+[33m1b9f168[m fix: handle deleted shared posts
+[33mdc27c50[m Merge pull request #15 from abdoamen040466-dev/feat/createPost
+[33m9f596c4[m[33m ([m[1;31morigin/feat/createPost[m[33m)[m fix: fix user image if it not exist
+[33m9737c24[m feat: show validation message
+[33mf2b9300[m feat: implement create post
+[33m4371541[m feat: create post ui
+[33mcbb3600[m feat :create Post Service & Edit sharedPostHtml
+[33mf54b7c1[m Merge pull request #14 from abdoamen040466-dev/feat/loading-interceptor
+[33m1fc4204[m[33m ([m[1;31morigin/feat/loading-interceptor[m[33m)[m feat: add http interceptors
+[33m036f6eb[m Merge pull request #13 from abdoamen040466-dev/feat/auth-interceptor
+[33mcc80ec0[m[33m ([m[1;31morigin/feat/auth-interceptor[m[33m)[m feat: add auth interceptor
+[33mae32d15[m[33m ([m[1;31morigin/feat/posts[m[33m)[m refactor: reorganize post feature structure
+[33m02e0f60[m feat: implement posts feed and interactions
+[33m4608cff[m Merge pull request #12 from abdoamen040466-dev/feat/home-post-ui
+[33m5e669e4[m[33m ([m[1;31morigin/feat/home-post-ui[m[33m)[m feat(home): implement post card UI
+[33mc8a7f8e[m Merge pull request #11 from abdoamen040466-dev/feat/navbar
+[33me42ce97[m[33m ([m[1;31morigin/feat/navbar[m[33m)[m feat(layout): implement responsive navigation bar
+[33mdb591d8[m Merge pull request #10 from abdoamen040466-dev/feature/auth-guard
+[33mc3b4500[m[33m ([m[1;31morigin/feature/auth-guard[m[33m)[m feat(auth): implement route guards
+[33me91bf5e[m Merge pull request #9 from abdoamen040466-dev/feature/auth-storage
+[33mca3b3e6[m[33m ([m[1;31morigin/feature/auth-storage[m[33m)[m feat(auth): implement auth storage service
+[33mbfa36d4[m Merge pull request #8 from abdoamen040466-dev/feature/login
+[33m53cd996[m[33m ([m[1;31morigin/feature/login[m[33m)[m feat(auth): implement login feature and fix bugs in register
+[33md4b7ab2[m Merge pull request #7 from abdoamen040466-dev/feature/register-error-handling
+[33mc1cd19b[m[33m ([m[1;31morigin/feature/register-error-handling[m[33m)[m feat(auth): improve register error handling
+[33mec2f83c[m Merge pull request #6 from abdoamen040466-dev/feat/register-api
+[33m81abb6f[m[33m ([m[1;31morigin/feat/register-api[m[33m)[m feat(auth): integrate register api
+[33m4a2801f[m Merge pull request #5 from abdoamen040466-dev/feature/auth-service
+[33m03d538b[m[33m ([m[1;31morigin/feature/auth-service[m[33m)[m feat(auth): implement authentication service
+[33m470dddc[m Merge pull request #4 from abdoamen040466-dev/feat/login
+[33maa3c43a[m[33m ([m[1;31morigin/feat/login[m[33m)[m feat(auth): implement login form
+[33m89ec54f[m Merge pull request #3 from abdoamen040466-dev/feature/register
+[33m99d5d89[m[33m ([m[1;31morigin/feature/register[m[33m)[m feat(auth): implement register form validation
+[33m2b2dbf3[m feat: implement register reactive form
+[33mdffa09d[m feat: build register page UI
+[33me60dc96[m chore: configure Flowbite
+[33m88b161a[m feat: add register request and response interfaces
+[33md9f39cc[m Merge pull request #2 from abdoamen040466-dev/feature/routing
+[33ma822ab8[m Merge pull request #1 from abdoamen040466-dev/feature/project-architecture
+[33m3db92fe[m feat: configure application routing
+[33m82c1655[m feat: create project architecture
+[33m8f7c1ad[m chore: configure Angular schematics naming
+[33m88006fd[m feat: Initialize Angular Project

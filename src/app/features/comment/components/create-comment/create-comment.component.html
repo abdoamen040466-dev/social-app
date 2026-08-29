@@ -2,20 +2,39 @@
   <div class="image">
     <img src="/assets/default-profile.png" class="w-10" alt="" />
   </div>
-  <div class="grow relative">
+  <div class="grow relative bg-mainColor rounded-2xl">
     <textarea
-      class="border-0 bg-mainColor rounded-2xl w-full min-h-32 text-2xl focus:ring-0 p-5 text-gray-600 placeholder:text-gray-400 placeholder:text-xl"
+      [formControl]="content"
+      class="h-40 resize-none border-0 bg-mainColor rounded-2xl w-full min-h-32 text-2xl focus:ring-0 p-5 text-gray-600 placeholder:text-gray-400 placeholder:text-xl"
       placeholder="Write a Comment"
     ></textarea>
-    <div class="image flex items-center gap-2 cursor-pointer absolute bottom-4 left-2">
+    <div
+      (click)="fileInput.click()"
+      class="image flex items-center gap-2 cursor-pointer absolute bottom-4 left-2"
+    >
       <i class="fa-solid fa-image"></i>
       <p>Photo/Video</p>
     </div>
+    <input type="file" accept="image/*" #fileInput hidden (change)="onFileSelected($event)" />
+
     <div
+      (click)="createComment()"
       class="bg-blue-600 px-4 py-2 w-fit text-white flex items-center gap-2 rounded-xl cursor-pointer absolute right-2 bottom-4"
     >
       <button type="button" class="cursor-pointer">Add Comment</button>
       <i class="fa-solid fa-paper-plane"></i>
     </div>
+    @if (imagePreview) {
+      <div class="mx-auto w-fit mb-2 felx flex-col items-center">
+        <img [src]="imagePreview" class="w-52" alt="" />
+        <button
+          (click)="deleteImage()"
+          type="button"
+          class="bg-red-600 px-4 py-2 mt-4 w-fit text-white rounded-xl cursor-pointer"
+        >
+          Delete Image
+        </button>
+      </div>
+    }
   </div>
 </div>
