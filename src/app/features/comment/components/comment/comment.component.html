@@ -6,31 +6,90 @@
         <p class="font-bold">{{ comment.commentCreator.name }}</p>
       </div>
       @if (isOwner()) {
-        <div #menu class="icon relative">
-          <i class="fa-solid fa-ellipsis-vertical"></i>
-          <div
-            [hidden]="!isMenuOpened"
-            class="avaterMenu text-[13px] md:text-lg absolute border-2 border-gray-500 bg-mainColor top-10 left-1/2 -translate-x-1/2 rounded-md p-1"
-          >
-            <ul class="relative px-5">
-              <i
-                class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
-              ></i>
-              <li (click)="deleteComment()" class="pb-2 hover:text-blue-700 cursor-pointer">
-                Delete
-              </li>
-              <li class="pb-2 hover:text-blue-700 border-t border-t-black cursor-pointer">Edit</li>
-            </ul>
-          </div>
+        <div class="icon relative">
+          <i (click)="toggleMenu($event)" class="fa-solid fa-ellipsis-vertical"></i>
+          @if (isMenuOpened) {
+            <div
+              (click)="$event.stopPropagation()"
+              class="avaterMenu text-[13px] md:text-lg absolute border-2 border-gray-500 bg-mainColor top-10 left-1/2 -translate-x-1/2 rounded-md p-1"
+            >
+              <ul class="relative px-5">
+                <i
+                  class="-top-7 left-1/2 -translate-x-1/2 text-2xl text-gray-500 fa-solid fa-caret-down absolute"
+                ></i>
+                <li (click)="deleteComment()" class="pb-2 hover:text-blue-700 cursor-pointer">
+                  Delete
+                </li>
+                <li
+                  (click)="startEditing()"
+                  class="pb-2 hover:text-blue-700 border-t border-t-black cursor-pointer"
+                >
+                  Edit
+                </li>
+              </ul>
+            </div>
+          }
         </div>
       }
     </div>
-    <div class="px-10 ms-4">
-      <p class="font-medium">{{ comment.content }}</p>
-      @if (comment.image) {
-        <img [src]="comment.image" class="mt-2 w-52" alt="" />
+    <div class="px-10 ms-4 relative">
+      @if (isEditing()) {
+        <div class="bg-mainColor rounded-2xl">
+          <textarea
+            [formControl]="content"
+            class="max-h-30 resize-none border-0 bg-mainColor rounded-2xl w-full text-2xl focus:ring-0 p-5 text-gray-600 placeholder:text-gray-400 placeholder:text-xl"
+          ></textarea>
+          <div
+            (click)="fileInput.click()"
+            class="image flex items-center gap-2 cursor-pointer absolute bottom-4 left-12"
+          >
+            <i class="fa-solid fa-image"></i>
+            @if (comment.image) {
+              <p>Change Photo</p>
+            } @else {
+              <p>Photo</p>
+            }
+          </div>
+          <input type="file" accept="image/*" #fileInput hidden (change)="onFileSelected($event)" />
+
+          <div
+            (click)="editComment()"
+            class="bg-blue-600 px-4 py-2 w-fit text-white flex items-center gap-2 rounded-xl cursor-pointer absolute right-12 bottom-4"
+          >
+            <button type="button" class="cursor-pointer">Save</button>
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+          <div
+            (click)="canselEdit()"
+            class="bg-yellow-600 px-4 py-2 w-fit text-white flex items-center gap-2 rounded-xl cursor-pointer absolute right-36 bottom-4"
+          >
+            <button type="button" class="cursor-pointer">Cansel</button>
+          </div>
+          @if (imagePreview) {
+            <div class="image w-fit mx-auto flex flex-col gap-4">
+              <div class="mb-4">
+                <img [src]="imagePreview" class="w-48" alt="" />
+              </div>
+              @if (!comment.image) {
+                <button
+                  type="button"
+                  (click)="deleteImage()"
+                  class="mx-auto bg-red-600 px-4 py-2 w-fit text-white rounded-xl cursor-pointer mb-3"
+                >
+                  Delete Image
+                </button>
+              }
+            </div>
+          }
+        </div>
+      } @else {
+        <p class="font-medium">{{ comment.content }}</p>
+        @if (comment.image) {
+          <img [src]="comment.image" class="mt-2 w-52" alt="" />
+        }
       }
     </div>
+
     <div class="ms-10 flex gap-2 mt-1">
       <button
         (click)="toggleLikeComment(comment.post, comment._id)"

@@ -44,6 +44,12 @@ export class PostFooterComponent {
     );
   }
 
+  updateComment(updatedComment: Comment) {
+    this.comments.update((comments) =>
+      comments.map((comment) => (comment._id === updatedComment._id ? updatedComment : comment)),
+    );
+  }
+
   showCreateComment(): void {
     this.createCommentflag = !this.createCommentflag;
   }

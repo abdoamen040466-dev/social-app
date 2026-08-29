@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { ToggleLikeCommentResponse } from '../models/toggle-like-response';
 import { CreateCommentResponse } from '../models/create-comment-response';
+import { UpdateCommentResponse } from '../models/update-comment-response';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,16 @@ export class CommentService {
 
   deleteComment(postId: string, commentId: string): Observable<any> {
     return this.httpClient.delete(`${environment.apiUrl}/posts/${postId}/comments/${commentId}`);
+  }
+
+  editComment(
+    postId: string,
+    commentId: string,
+    newComment: FormData,
+  ): Observable<UpdateCommentResponse> {
+    return this.httpClient.put<UpdateCommentResponse>(
+      `${environment.apiUrl}/posts/${postId}/comments/${commentId}`,
+      newComment,
+    );
   }
 }

@@ -33,6 +33,7 @@
   @for (item of comments(); track item._id) {
     <app-comment
       (deletedComment)="deleteComment($event)"
+      (UpdatedComment)="updateComment($event)"
       [comment]="item"
       [post]="post"
     ></app-comment>
