@@ -56,15 +56,14 @@ export class CreateCommentComponent {
   }
 
   createComment() {
-    console.log('hi');
-
     const formData = new FormData();
     formData.append('content', this.content.getRawValue() ?? '');
     if (this.selectedImage) {
       formData.append('image', this.selectedImage);
     }
     if (this.isReply) {
-      this.commentService.createReply(this.post._id, this.comment?._id, formData).subscribe({
+      const id = this.comment.parentComment ? this.comment.parentComment : this.comment?._id;
+      this.commentService.createReply(this.post._id, id, formData).subscribe({
         next: (res) => {
           this.newComment.emit(res.data.reply);
           console.log(res);
