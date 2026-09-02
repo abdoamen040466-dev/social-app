@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment.development';
 import { ToggleLikeCommentResponse } from '../models/toggle-like-response';
 import { CreateCommentResponse } from '../models/create-comment-response';
 import { UpdateCommentResponse } from '../models/update-comment-response';
+import { CreateReplyResponse } from '../models/create-reply-response';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,17 @@ export class CommentService {
     return this.httpClient.put<UpdateCommentResponse>(
       `${environment.apiUrl}/posts/${postId}/comments/${commentId}`,
       newComment,
+    );
+  }
+
+  createReply(
+    postId: string,
+    commentId: string,
+    comment: FormData,
+  ): Observable<CreateReplyResponse> {
+    return this.httpClient.post<CreateReplyResponse>(
+      `${environment.apiUrl}/posts/${postId}/comments/${commentId}/replies`,
+      comment,
     );
   }
 }

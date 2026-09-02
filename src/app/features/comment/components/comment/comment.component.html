@@ -101,7 +101,10 @@
         {{ comment.likes.length }} Like
       </button>
       <span>|</span>
-      <button type="button" class="cursor-pointer">Reply</button>
+      <button (click)="toggleReply()" type="button" class="cursor-pointer">Reply</button>
     </div>
   </div>
+  @if (showReply) {
+    <app-create-reply [comment]="comment" [post]="post"></app-create-reply>
+  }
 </section>

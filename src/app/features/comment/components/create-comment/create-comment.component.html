@@ -21,7 +21,11 @@
       (click)="createComment()"
       class="bg-blue-600 px-4 py-2 w-fit text-white flex items-center gap-2 rounded-xl cursor-pointer absolute right-2 bottom-4"
     >
-      <button type="button" class="cursor-pointer">Add Comment</button>
+      @if (!isReply) {
+        <button type="button" class="cursor-pointer">Add Comment</button>
+      } @else {
+        <button type="button" class="cursor-pointer">Reply</button>
+      }
       <i class="fa-solid fa-paper-plane"></i>
     </div>
     @if (imagePreview) {

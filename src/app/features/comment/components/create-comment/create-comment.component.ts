@@ -22,6 +22,8 @@ export class CreateCommentComponent {
   private readonly commentService = inject(CommentService);
 
   @Input() post!: Post;
+  @Input() comment!: Comment;
+  @Input() isReply: boolean = false;
   @Output() newComment = new EventEmitter<Comment>();
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
@@ -54,17 +56,29 @@ export class CreateCommentComponent {
   }
 
   createComment() {
+    console.log('hi');
+
     const formData = new FormData();
     formData.append('content', this.content.getRawValue() ?? '');
     if (this.selectedImage) {
       formData.append('image', this.selectedImage);
     }
-    this.commentService.createComment(this.post._id, formData).subscribe({
-      next: (res) => {
-        this.newComment.emit(res.data.comment);
-        console.log(res);
-        this.content.reset();
-      },
-    });
+    if (this.isReply) {
+      this.commentService.createReply(this.post._id, this.comment?._id, formData).subscribe({
+        next: (res) => {
+          this.newComment.emit(res.data.reply);
+          console.log(res);
+          this.content.reset();
+        },
+      });
+    } else {
+      this.commentService.createComment(this.post._id, formData).subscribe({
+        next: (res) => {
+          this.newComment.emit(res.data.comment);
+          console.log(res);
+          this.content.reset();
+        },
+      });
+    }
   }
 }

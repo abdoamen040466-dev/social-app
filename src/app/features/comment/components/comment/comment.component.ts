@@ -15,10 +15,11 @@ import { CommentService } from '../../services/comment.service';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { Post } from '../../../home/models/get-all-posts-response';
 import { FormControl, ɵInternalFormsSharedModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateReplyComponent } from '../create-reply/create-reply.component';
 
 @Component({
   selector: 'app-comment',
-  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule],
+  imports: [ɵInternalFormsSharedModule, ReactiveFormsModule, CreateReplyComponent],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css',
 })
@@ -42,8 +43,13 @@ export class CommentComponent {
   isEditing = signal<boolean>(false);
   selectedImage: File | null = null;
   imagePreview: string | null = null;
+  showReply: boolean = false;
 
   content: FormControl = new FormControl();
+
+  toggleReply() {
+    this.showReply = !this.showReply;
+  }
 
   startEditing() {
     this.isMenuOpened = false;
