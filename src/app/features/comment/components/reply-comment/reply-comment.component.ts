@@ -18,6 +18,7 @@ export class ReplyCommentComponent implements OnInit {
   private readonly commentService = inject(CommentService);
   @Input() comment!: Comment;
   @Input() post!: Post;
+  @Input() reply!: Comment;
   @Output() AddedComment = new EventEmitter<Comment[]>();
   replies = signal<Comment[] | null>(null);
 

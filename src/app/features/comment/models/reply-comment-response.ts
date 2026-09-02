@@ -21,27 +21,3 @@ interface Pagination {
 interface Data {
   replies: Comment[];
 }
-
-interface Reply {
-  _id: string;
-  content: string;
-  commentCreator: CommentCreator;
-  post: string;
-  parentComment: string;
-  likes: any[];
-  createdAt: string;
-  likesCount: number;
-  isReply: boolean;
-  id: string;
-}
-
-interface CommentCreator {
-  _id: string;
-  name: string;
-  username: string;
-  photo: string;
-  followersCount: number;
-  followingCount: number;
-  bookmarksCount: number;
-  id: string;
-}

@@ -36,6 +36,7 @@ export class CommentComponent {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @Output() deletedComment = new EventEmitter<Comment>();
   @Output() UpdatedComment = new EventEmitter<Comment>();
+  @Output() ReplyComment = new EventEmitter<Comment>();
 
   isMenuOpened: boolean = false;
   likedComment = signal<boolean>(false);
@@ -46,6 +47,11 @@ export class CommentComponent {
   showReply: boolean = false;
 
   content: FormControl = new FormControl();
+
+  sendReply(comment: Comment) {
+    this.showReply = false;
+    this.ReplyComment.emit(comment);
+  }
 
   toggleReply() {
     this.showReply = !this.showReply;

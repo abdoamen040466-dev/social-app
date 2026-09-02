@@ -1,1 +1,6 @@
-<app-create-comment [comment]="comment" [post]="post" [isReply]="true"></app-create-comment>
+<app-create-comment
+  (newComment)="sendReply($event)"
+  [comment]="comment"
+  [post]="post"
+  [isReply]="true"
+></app-create-comment>

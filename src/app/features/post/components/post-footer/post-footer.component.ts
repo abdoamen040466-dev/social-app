@@ -30,6 +30,7 @@ export class PostFooterComponent {
   commentsVisible = signal(false);
   commentsLoaded = signal(false);
   createCommentflag: boolean = false;
+  reply!: Comment;
 
   addNewComment(comment: Comment) {
     this.comments.update((comments) => [comment, ...comments]);
@@ -38,9 +39,17 @@ export class PostFooterComponent {
     this.commentsVisible.set(true);
   }
 
-  // addNewComments(comments: Comment[]){
-  //   this.comments.update((comments) => [comments, ...comments]);
-  // }
+  ShowReply(newReply: Comment) {
+    console.log('okkkkk');
+
+    const parentcomment = this.comments().filter(
+      (comment) => comment._id === newReply.parentComment,
+    );
+
+    if (!parentcomment) return;
+    if (parentcomment[0].repliesCount === 0) parentcomment[0].repliesCount += 1;
+    else this.reply = newReply;
+  }
 
   deleteComment(deletedComment: Comment) {
     // this.posts.update((posts) => posts.filter((post) => post._id !== id));

@@ -34,12 +34,13 @@
     <app-comment
       (deletedComment)="deleteComment($event)"
       (UpdatedComment)="updateComment($event)"
+      (ReplyComment)="ShowReply($event)"
       [comment]="item"
       [post]="post"
     ></app-comment>
     @if (item.repliesCount > 0) {
       <div class="ms-10 border-s">
-        <app-reply-comment [post]="post" [comment]="item"></app-reply-comment>
+        <app-reply-comment [post]="post" [comment]="item" [reply]="reply"></app-reply-comment>
       </div>
     }
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { CreateCommentComponent } from '../create-comment/create-comment.component';
 import { Comment } from '../../../post/models/get-all-comments-response';
 import { Post } from '../../../home/models/get-all-posts-response';
@@ -12,4 +12,9 @@ import { Post } from '../../../home/models/get-all-posts-response';
 export class CreateReplyComponent {
   @Input() comment!: Comment;
   @Input() post!: Post;
+  @Output() reply = new EventEmitter<Comment>();
+
+  sendReply(newReply: Comment) {
+    this.reply.emit(newReply);
+  }
 }
