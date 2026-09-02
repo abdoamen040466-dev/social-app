@@ -6,10 +6,11 @@ import { CommentComponent } from '../../../comment/components/comment/comment.co
 import { CommentsService } from '../../services/comments.service';
 import { Comment } from '../../models/get-all-comments-response';
 import { CreateCommentComponent } from '../../../comment/components/create-comment/create-comment.component';
+import { ReplyCommentComponent } from '../../../comment/components/reply-comment/reply-comment.component';
 
 @Component({
   selector: 'app-post-footer',
-  imports: [CommentComponent, CreateCommentComponent],
+  imports: [CommentComponent, CreateCommentComponent, ReplyCommentComponent],
   templateUrl: './post-footer.component.html',
   styleUrl: './post-footer.component.css',
 })
@@ -36,6 +37,10 @@ export class PostFooterComponent {
     this.commentsLoaded.set(true);
     this.commentsVisible.set(true);
   }
+
+  // addNewComments(comments: Comment[]){
+  //   this.comments.update((comments) => [comments, ...comments]);
+  // }
 
   deleteComment(deletedComment: Comment) {
     // this.posts.update((posts) => posts.filter((post) => post._id !== id));

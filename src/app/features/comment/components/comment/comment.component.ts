@@ -5,7 +5,6 @@ import {
   HostListener,
   inject,
   Input,
-  input,
   Output,
   signal,
   ViewChild,
@@ -33,6 +32,7 @@ export class CommentComponent {
 
   @Input() comment!: Comment;
   @Input() post!: Post;
+  @Input() isReply: boolean = false;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   @Output() deletedComment = new EventEmitter<Comment>();
   @Output() UpdatedComment = new EventEmitter<Comment>();

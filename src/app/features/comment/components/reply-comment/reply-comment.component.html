@@ -1,0 +1,5 @@
+@for (item of replies(); track $index) {
+  <div class="ps-10">
+    <app-comment [post]="post" [comment]="item"></app-comment>
+  </div>
+}

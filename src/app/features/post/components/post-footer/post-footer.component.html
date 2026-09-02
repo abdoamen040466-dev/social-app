@@ -37,5 +37,10 @@
       [comment]="item"
       [post]="post"
     ></app-comment>
+    @if (item.repliesCount > 0) {
+      <div class="ms-10 border-s">
+        <app-reply-comment [post]="post" [comment]="item"></app-reply-comment>
+      </div>
+    }
   }
 }
