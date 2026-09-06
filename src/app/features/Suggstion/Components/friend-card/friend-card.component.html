@@ -1,0 +1,38 @@
+<div class="px-2 py-4 border border-default rounded-base shadow-xs mb-4">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-1">
+      <div>
+        <img
+          [src]="friend.photo ? friend.photo : '/assets/default-profile.png'"
+          class="w-10 rounded-full object-cover"
+        />
+      </div>
+      <div>
+        <h3>{{ friend.name }}</h3>
+        <p>{{ friend.username }}</p>
+      </div>
+    </div>
+    @if (followed()) {
+      <div
+        (click)="toggleFollow()"
+        class="text-green-600 bg-green-200 py-1 px-2 rounded-full cursor-pointer"
+      >
+        <i class="fa-solid fa-check"></i>
+        <span class="ms-1 font-bold">Followed</span>
+      </div>
+    } @else {
+      <div
+        (click)="toggleFollow()"
+        class="text-blue-600 bg-blue-200 py-1 px-2 rounded-full cursor-pointer"
+      >
+        <i class="fa-solid fa-user-plus"></i>
+        <span class="ms-1 font-bold">Follow</span>
+      </div>
+    }
+  </div>
+  <div class="bg-mainColor w-fit text-gray-700 p-2 rounded-full mt-2">
+    <p>
+      <span>{{ friend.followersCount }}</span> follower
+    </p>
+  </div>
+</div>
