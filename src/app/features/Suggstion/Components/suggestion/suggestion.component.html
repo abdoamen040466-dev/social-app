@@ -1,0 +1,12 @@
+<section class="p-4 bg-white border border-default rounded-base shadow-xs mx-auto me-4">
+  <header class="flex justify-between items-center mb-4">
+    <div class="flex items-center gap-3">
+      <i class="fa-solid fa-user-group text-blue-600"></i>
+      <h2>Suggested Friend</h2>
+    </div>
+    <span class="bg-mainColor rounded-full px-2">5</span>
+  </header>
+  @for (item of friends(); track item._id) {
+    <app-friend-card [friend]="item"></app-friend-card>
+  }
+</section>

@@ -1,16 +1,22 @@
-<main>
-  <app-create-post (childEvent)="addNewPost($event)"></app-create-post>
-  <section>
-    @for (item of posts(); track item._id) {
-      @if (item.isShare || (!item.body && !item.image && !item.sharedPost)) {
-        <app-shared-post (PostDeletedId)="removePost($event)" [post]="item"></app-shared-post>
-      } @else {
-        <app-post
-          (postShared)="addNewPost($event)"
-          (PostDeletedId)="removePost($event)"
-          [post]="item"
-        ></app-post>
+<section class="flex gap-4 mt-4">
+  <div class="flex-1"></div>
+  <main class="flex-2">
+    <app-create-post (childEvent)="addNewPost($event)"></app-create-post>
+    <section>
+      @for (item of posts(); track item._id) {
+        @if (item.isShare || (!item.body && !item.image && !item.sharedPost)) {
+          <app-shared-post (PostDeletedId)="removePost($event)" [post]="item"></app-shared-post>
+        } @else {
+          <app-post
+            (postShared)="addNewPost($event)"
+            (PostDeletedId)="removePost($event)"
+            [post]="item"
+          ></app-post>
+        }
       }
-    }
-  </section>
-</main>
+    </section>
+  </main>
+  <aside class="flex-1">
+    <app-suggestion> </app-suggestion>
+  </aside>
+</section>

@@ -5,10 +5,11 @@ import { PostComponent } from '../../../post/components/normal-post/post.compone
 import { Post } from '../../models/get-all-posts-response';
 import { SharedPostComponent } from '../../../post/components/shared-post/shared-post.component';
 import { CreatePostComponent } from '../../../post/components/create-post/create-post.component';
+import { SuggestionComponent } from '../../../Suggstion/Components/suggestion/suggestion.component';
 
 @Component({
   selector: 'app-home',
-  imports: [PostComponent, SharedPostComponent, CreatePostComponent],
+  imports: [PostComponent, SharedPostComponent, CreatePostComponent, SuggestionComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
