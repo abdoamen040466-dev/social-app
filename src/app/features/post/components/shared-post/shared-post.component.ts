@@ -12,6 +12,8 @@ import { PostFooterComponent } from '../post-footer/post-footer.component';
 })
 export class SharedPostComponent {
   @Input() post!: Post;
+  @Input() fullWidth: boolean = false;
+
   @Output() PostDeletedId = new EventEmitter<string>();
 
   SendDeletedPostId(id: string): void {

@@ -29,6 +29,7 @@ export class PostComponent {
 
   @Input() post!: Post;
   @Input() footerFlag: boolean = true;
+  @Input() fullWidth: boolean = false;
 
   @Output() postShared = new EventEmitter<Post>();
   @Output() PostDeletedId = new EventEmitter<string>();

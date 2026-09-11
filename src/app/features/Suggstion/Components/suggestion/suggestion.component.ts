@@ -24,7 +24,6 @@ export class SuggestionComponent implements OnInit {
     this.suggestionService.getFollowSuggestion().subscribe({
       next: (res) => {
         this.friends.set(res.data.suggestions);
-        console.log(res);
       },
     });
   }
