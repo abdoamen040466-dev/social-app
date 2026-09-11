@@ -1,5 +1,7 @@
 <section
-  class="w-full max-w-4xl mt-4 bg-neutral-primary-soft mx-auto border-default rounded-base shadow-xs p-6"
+  class="w-full mt-4 bg-neutral-primary-soft mx-auto border-default rounded-base shadow-xs p-6"
+  [class.max-w-4xl]="!fullWidth"
+  [class.max-w-7xl]="fullWidth"
 >
   <div class="">
     <app-post-header
@@ -10,9 +12,9 @@
   </div>
   <div>
     @if (!post.sharedPost) {
-      <app-post [post]="post" [footerFlag]="false"></app-post>
+      <app-post [post]="post" [footerFlag]="false" [fullWidth]="fullWidth"></app-post>
     } @else {
-      <app-post [post]="post.sharedPost" [footerFlag]="false"></app-post>
+      <app-post [post]="post.sharedPost" [footerFlag]="false" [fullWidth]="fullWidth"></app-post>
     }
   </div>
   <div class="">

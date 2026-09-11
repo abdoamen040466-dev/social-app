@@ -1,0 +1,3 @@
+:host ::ng-deep app-post .max-w-4xl {
+  max-width: none;
+}
