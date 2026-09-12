@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment.development';
 import { GetMyprofileResponse } from '../models/get-myprofile-response';
 import { GetBookmarks } from '../models/get-bookmarks';
 import { GetMyPosts } from '../models/get-my-posts';
+import { ChangePhotoResponse } from '../models/change-photo-response';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +23,12 @@ export class ProfileService {
 
   getBookMarks(): Observable<GetBookmarks> {
     return this.httpClient.get<GetBookmarks>(`${environment.apiUrl}/users/bookmarks`);
+  }
+
+  uploadProfilePhoto(image: FormData): Observable<ChangePhotoResponse> {
+    return this.httpClient.put<ChangePhotoResponse>(
+      `${environment.apiUrl}/users/upload-photo`,
+      image,
+    );
   }
 }

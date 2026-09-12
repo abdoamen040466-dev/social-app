@@ -5,15 +5,19 @@ import { Post } from '../../../home/models/get-all-posts-response';
 import { PostComponent } from '../../../post/components/normal-post/post.component';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { SharedPostComponent } from '../../../post/components/shared-post/shared-post.component';
+import { ChangePhotoComponent } from '../components/change-photo/change-photo.component';
+import { HomeService } from '../../../home/services/home.service';
+import { PostService } from '../../../post/services/post.service';
 
 @Component({
   selector: 'app-profile',
-  imports: [PostComponent, SharedPostComponent],
+  imports: [PostComponent, SharedPostComponent, ChangePhotoComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
 export class ProfileComponent implements OnInit {
   private readonly profileService = inject(ProfileService);
+  private readonly postService = inject(PostService);
   private readonly authStorageService = inject(AuthStorageService);
 
   ngOnInit(): void {
@@ -32,10 +36,11 @@ export class ProfileComponent implements OnInit {
   posts = signal<Post[]>([]);
   activeTab = signal<'posts' | 'bookmarks'>('posts');
 
+  imageClicked: boolean = false;
+
   getMyProfile() {
     this.profileService.getMyProfile().subscribe({
       next: (res) => {
-        console.log(res);
         this.profile.set(res.data.user);
       },
     });
@@ -46,8 +51,6 @@ export class ProfileComponent implements OnInit {
     if (id)
       this.profileService.getUserPosts(id).subscribe({
         next: (res) => {
-          console.log('posts');
-          console.log(res);
           this.myPosts.set(res.data.posts);
           this.posts.set(res.data.posts);
           this.postCounter.set(res.data.posts.length);
@@ -58,8 +61,6 @@ export class ProfileComponent implements OnInit {
   getMyBookmarks() {
     this.profileService.getBookMarks().subscribe({
       next: (res) => {
-        console.log('book');
-        console.log(res);
         this.bookmarks.set(res.data.bookmarks);
         this.bookmarkCounter.set(res.data.bookmarks.length);
       },
@@ -74,5 +75,18 @@ export class ProfileComponent implements OnInit {
   showMyBookmarks() {
     this.posts.set(this.bookmarks());
     this.activeTab.set('bookmarks');
+  }
+
+  getPost(id: string) {
+    this.postService.getPost(id).subscribe({
+      next: (res) => {
+        const post = res.data.post;
+        this.myPosts.update((posts) => [post, ...posts]);
+      },
+    });
+  }
+  changePhoto(photo: { photo: string; postId: string }) {
+    this.profile.update((profile) => (profile ? { ...profile, photo: photo.photo } : profile));
+    this.getPost(photo.postId);
   }
 }
