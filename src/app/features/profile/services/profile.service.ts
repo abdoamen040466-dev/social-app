@@ -6,6 +6,8 @@ import { GetMyprofileResponse } from '../models/get-myprofile-response';
 import { GetBookmarks } from '../models/get-bookmarks';
 import { GetMyPosts } from '../models/get-my-posts';
 import { ChangePhotoResponse } from '../models/change-photo-response';
+import { ChangePasswordRequest } from '../models/change-password-request';
+import { ChangePasswordResponse } from '../models/change-password-response';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +31,13 @@ export class ProfileService {
     return this.httpClient.put<ChangePhotoResponse>(
       `${environment.apiUrl}/users/upload-photo`,
       image,
+    );
+  }
+
+  changePassword(request: ChangePasswordRequest): Observable<ChangePasswordResponse> {
+    return this.httpClient.patch<ChangePasswordResponse>(
+      `${environment.apiUrl}/users/change-password`,
+      request,
     );
   }
 }
