@@ -6,6 +6,9 @@
       (changePhoto)="changePhoto($event)"
     ></app-change-photo>
   }
+  @if (changeClicked) {
+    <app-change-password (close)="changeClicked = false"> </app-change-password>
+  }
 
   <div class="mx-auto overflow-hidden rounded-3xl bg-white shadow-sm">
     <!-- Cover -->
@@ -41,11 +44,21 @@
 
             <p class="mt-1 text-base text-slate-500 sm:text-lg">@{{ profile()?.username }}</p>
 
-            <div
-              class="mt-2 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600"
-            >
-              <i class="fa-solid fa-user"></i>
-              <span>Route Posts member</span>
+            <div>
+              <div
+                class="mt-2 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600"
+              >
+                <i class="fa-solid fa-user"></i>
+                <span>Route Posts member</span>
+              </div>
+
+              <button
+                (click)="changeClicked = true"
+                type="button"
+                class="mt-2 inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600 cursor-pointer"
+              >
+                Change Password
+              </button>
             </div>
           </div>
         </div>

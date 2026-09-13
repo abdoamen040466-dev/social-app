@@ -8,10 +8,11 @@ import { SharedPostComponent } from '../../../post/components/shared-post/shared
 import { ChangePhotoComponent } from '../components/change-photo/change-photo.component';
 import { HomeService } from '../../../home/services/home.service';
 import { PostService } from '../../../post/services/post.service';
+import { ChangePasswordComponent } from '../components/change-password/change-password.component';
 
 @Component({
   selector: 'app-profile',
-  imports: [PostComponent, SharedPostComponent, ChangePhotoComponent],
+  imports: [PostComponent, SharedPostComponent, ChangePhotoComponent, ChangePasswordComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
   activeTab = signal<'posts' | 'bookmarks'>('posts');
 
   imageClicked: boolean = false;
+  changeClicked: boolean = false;
 
   getMyProfile() {
     this.profileService.getMyProfile().subscribe({
