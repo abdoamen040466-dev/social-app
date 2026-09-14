@@ -9,6 +9,7 @@ import { NotificationsComponent } from './features/notifications/pages/notificat
 import { NotFoundComponent } from './features/not-found/pages/not-found/not-found.component';
 import { authGuard } from './core/auth/guards/auth-guard-guard';
 import { guestGuard } from './core/auth/guards/guest-guard';
+import { UserProfileComponent } from './features/user-profile/pages/user-profile/user-profile.component';
 
 export const routes: Routes = [
   {
@@ -35,6 +36,12 @@ export const routes: Routes = [
         path: 'notifications',
         component: NotificationsComponent,
         title: 'notifications',
+        canActivate: [authGuard],
+      },
+      {
+        path: 'profile/:id',
+        component: UserProfileComponent,
+        title: 'profile',
         canActivate: [authGuard],
       },
       { path: '**', component: NotFoundComponent, title: 'notFound' },
