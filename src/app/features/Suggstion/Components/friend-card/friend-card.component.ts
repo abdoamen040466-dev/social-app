@@ -1,6 +1,7 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { Suggestion } from '../../models/get-suggested-response';
 import { FollowService } from '../../services/follow.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-friend-card',
@@ -10,6 +11,7 @@ import { FollowService } from '../../services/follow.service';
 })
 export class FriendCardComponent {
   private readonly followService = inject(FollowService);
+  private readonly router = inject(Router);
 
   followed = signal<boolean>(false);
 
@@ -28,5 +30,9 @@ export class FriendCardComponent {
         }
       },
     });
+  }
+
+  goToProfile(userId: string) {
+    this.router.navigate(['/profile', userId]);
   }
 }

@@ -3,8 +3,9 @@
     <div class="flex items-center gap-1">
       <div>
         <img
+          (click)="goToProfile(friend._id)"
           [src]="friend.photo ? friend.photo : '/assets/default-profile.png'"
-          class="w-10 rounded-full object-cover"
+          class="w-10 rounded-full object-cover cursor-pointer"
         />
       </div>
       <div>

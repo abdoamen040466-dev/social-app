@@ -11,6 +11,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-header',
@@ -21,6 +22,7 @@ import {
 export class PostHeaderComponent {
   private readonly postService = inject(PostService);
   private readonly authService = inject(AuthStorageService);
+  private readonly router = inject(Router);
 
   @Input() post!: Post;
   @Input() isShared!: boolean;
@@ -63,5 +65,9 @@ export class PostHeaderComponent {
     } else {
       this.isMenuOpened = false;
     }
+  }
+
+  goToProfile(userId: string) {
+    this.router.navigate(['/profile', userId]);
   }
 }

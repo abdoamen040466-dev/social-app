@@ -2,9 +2,10 @@
   <div class="left flex items-center gap-2">
     <div class="image">
       <img
+        (click)="goToProfile(post.user._id)"
         [src]="post.user.photo || 'assets/default-profile.png'"
         alt=""
-        class="w-10 h-10 rounded-full object-cover"
+        class="w-10 h-10 rounded-full object-cover cursor-pointer"
       />
     </div>
     <div>
