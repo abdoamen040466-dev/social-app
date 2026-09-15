@@ -1,0 +1,34 @@
+<div class="relative group">
+  <div class="flex gap-2 items-center">
+    <i
+      (click)="toggleLikePost()"
+      [class.text-blue-600]="likedPost()"
+      [class.text-black]="!likedPost()"
+      class="fa-solid fa-thumbs-up cursor-pointer"
+    ></i>
+
+    <span class="font-light text-gray-500 cursor-pointer"> {{ post.likesCount }} likes </span>
+  </div>
+
+  <!-- Likes Users -->
+  @if (showLikesUser && usersLikedPost().length > 0) {
+    <div class="absolute bottom-full left-0 hidden group-hover:block z-50 pb-2">
+      <div class="w-56 rounded-xl border border-gray-200 bg-white p-3 shadow-lg">
+        <h3 class="mb-3 text-sm font-semibold text-gray-700">Liked by</h3>
+
+        <div class="space-y-2">
+          @for (item of usersLikedPost(); track $index) {
+            <div
+              (click)="goToUserProfile(item._id)"
+              class="flex items-center gap-2 rounded-lg p-1 hover:bg-gray-100 cursor-pointer"
+            >
+              <img [src]="item.photo" alt="" class="h-8 w-8 rounded-full object-cover" />
+
+              <span class="text-sm font-medium text-gray-700"> {{ item.name }} </span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

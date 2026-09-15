@@ -17,7 +17,6 @@ import { FollowService } from '../../../Suggstion/services/follow.service';
 })
 export class UserProfileComponent {
   private readonly route = inject(ActivatedRoute);
-  private readonly profileService = inject(ProfileService);
   private readonly userProfileService = inject(UserProfileService);
   private readonly followService = inject(FollowService);
 
@@ -48,7 +47,7 @@ export class UserProfileComponent {
   getUserProfile() {
     if (!this.id) return;
 
-    this.profileService.getUserProfile(this.id).subscribe({
+    this.userProfileService.getUserProfile(this.id).subscribe({
       next: (res) => {
         this.user.set(res.data.user);
         this.isFollowing.set(res.data.isFollowing);

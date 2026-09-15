@@ -41,10 +41,4 @@ export class ProfileService {
       request,
     );
   }
-
-  getUserProfile(userId: string): Observable<UserProfileResponse> {
-    return this.httpClient.get<UserProfileResponse>(
-      `${environment.apiUrl}/users/${userId}/profile`,
-    );
-  }
 }

@@ -10,6 +10,7 @@ import { NotFoundComponent } from './features/not-found/pages/not-found/not-foun
 import { authGuard } from './core/auth/guards/auth-guard-guard';
 import { guestGuard } from './core/auth/guards/guest-guard';
 import { UserProfileComponent } from './features/user-profile/pages/user-profile/user-profile.component';
+import { PostDetailsComponent } from './features/post/components/post-details/post-details.component';
 
 export const routes: Routes = [
   {
@@ -42,6 +43,12 @@ export const routes: Routes = [
         path: 'profile/:id',
         component: UserProfileComponent,
         title: 'profile',
+        canActivate: [authGuard],
+      },
+      {
+        path: 'post/:id',
+        component: PostDetailsComponent,
+        title: 'PostDetails',
         canActivate: [authGuard],
       },
       { path: '**', component: NotFoundComponent, title: 'notFound' },
