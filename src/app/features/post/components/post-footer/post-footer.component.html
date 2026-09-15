@@ -1,13 +1,8 @@
 <div class="flex justify-between items-center">
-  <div class="flex gap-2 items-center">
-    <i
-      (click)="toggleLikePost()"
-      [class.text-blue-600]="likedPost()"
-      [class.text-black]="!likedPost()"
-      class="fa-solid fa-thumbs-up"
-    ></i>
-    <span class="font-light text-gray-500">{{ post.likesCount }} likes</span>
-  </div>
+  <app-post-likes-component
+    [post]="post"
+    [showLikesUser]="showLikesUser"
+  ></app-post-likes-component>
   <div class="flex gap-2 items-center">
     <p class="font-light text-gray-600">{{ post.sharesCount }} shares</p>
     @if (post.commentsCount > 0) {
@@ -23,7 +18,7 @@
         {{ post.commentsCount }} comments
       </p>
     }
-    <p class="text-blue-600 font-medium">view details</p>
+    <p (click)="goToDetails()" class="text-blue-600 font-medium cursor-pointer">view details</p>
   </div>
 </div>
 @if (createCommentflag) {
