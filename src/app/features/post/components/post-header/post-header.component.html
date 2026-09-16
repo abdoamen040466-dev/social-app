@@ -30,6 +30,7 @@
         @if (isOwner()) {
           <li (click)="deletePost()" class="pb-2 hover:text-blue-700 cursor-pointer">Delete</li>
           <li
+            (click)="startEditing()"
             [hidden]="isShared"
             class="pb-2 hover:text-blue-700 border-y border-t-black cursor-pointer"
           >

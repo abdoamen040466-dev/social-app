@@ -28,10 +28,15 @@ export class PostHeaderComponent {
   @Input() isShared!: boolean;
   @Output() postShared = new EventEmitter<Post>();
   @Output() postDeleted = new EventEmitter<string>();
+  @Output() editing = new EventEmitter<void>();
 
   @ViewChild('menu') menu!: ElementRef;
 
   isMenuOpened: boolean = false;
+
+  startEditing(): void {
+    this.editing.emit();
+  }
 
   savePost(): void {
     this.postService.savePost(this.post._id).subscribe();
