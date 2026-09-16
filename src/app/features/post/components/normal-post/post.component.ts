@@ -16,10 +16,11 @@ import { PostService } from '../../services/post.service';
 import { AuthStorageService } from '../../../../core/auth/services/auth-storage.service';
 import { PostHeaderComponent } from '../post-header/post-header.component';
 import { PostFooterComponent } from '../post-footer/post-footer.component';
+import { EditPostComponent } from '../edit-post/edit-post.component';
 
 @Component({
   selector: 'app-post',
-  imports: [PostHeaderComponent, PostFooterComponent],
+  imports: [PostHeaderComponent, PostFooterComponent, EditPostComponent],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
@@ -34,6 +35,8 @@ export class PostComponent {
 
   @Output() postShared = new EventEmitter<Post>();
   @Output() PostDeletedId = new EventEmitter<string>();
+
+  editing = signal<boolean>(false);
 
   addSharedPost(post: Post): void {
     this.postShared.emit(post);

@@ -7,6 +7,7 @@ import { CreatePostResponse } from '../models/create-post-response';
 import { GetSinglePost } from '../models/get-single-post';
 import { SharePostResponse } from '../models/share-post-response';
 import { DeletePostResponse } from '../models/delete-post-response';
+import { UpdatePostResponse } from '../models/update-post-response';
 
 @Injectable({
   providedIn: 'root',
@@ -41,5 +42,9 @@ export class PostService {
 
   getPost(postId: string): Observable<GetSinglePost> {
     return this.httpClient.get<GetSinglePost>(`${environment.apiUrl}/posts/${postId}`);
+  }
+
+  editPost(id: string, post: FormData): Observable<UpdatePostResponse> {
+    return this.httpClient.put<UpdatePostResponse>(`${environment.apiUrl}/posts/${id}`, post);
   }
 }

@@ -9,14 +9,23 @@
         <app-post-header
           (postShared)="addSharedPost($event)"
           (postDeleted)="SendDeletedPostId($event)"
+          (editing)="editing.set(true)"
           [post]="post"
           [isShared]="false"
         ></app-post-header>
-        <p class="text-[17px]">{{ post.body }}</p>
-        @if (post.image) {
-          <div class="image mt-4">
-            <img [src]="post.image" width="100%" alt="" />
-          </div>
+        @if (editing()) {
+          <app-edit-post
+            [post]="post"
+            (editCompleted)="editing.set(false)"
+            (editedPost)="post = $event"
+          ></app-edit-post>
+        } @else {
+          <p class="text-[17px]">{{ post.body }}</p>
+          @if (post.image) {
+            <div class="image mt-4">
+              <img [src]="post.image" width="100%" alt="" />
+            </div>
+          }
         }
       } @else {
         <p class="text-center bg-mainColor rounded-xl py-2 text-xl">
