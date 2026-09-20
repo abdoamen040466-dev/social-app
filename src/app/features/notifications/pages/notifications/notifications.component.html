@@ -1,1 +1,60 @@
-<p>notifications works!</p>
+<section class="min-h-screen bg-gray-100 p-4 md:p-6">
+  <div
+    class="max-w-6xl mx-auto bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+  >
+    <!-- Header -->
+    <div class="p-5 md:p-6 border-b border-gray-200">
+      <div class="flex justify-between items-start gap-4">
+        <div>
+          <h1 class="text-2xl font-bold text-gray-900">Notifications</h1>
+
+          <p class="text-sm text-gray-500 mt-1">
+            Realtime updates for likes, comments, shares, and follows.
+          </p>
+        </div>
+
+        <button
+          (click)="markAllAsRead()"
+          type="button"
+          class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-gray-500 text-sm font-medium hover:bg-gray-50 cursor-pointer"
+        >
+          <i class="fa-solid fa-check-double"></i>
+          <span class="hidden sm:inline">Mark all as read</span>
+        </button>
+      </div>
+
+      <!-- Tabs -->
+      <div class="flex gap-2 mt-5">
+        <button
+          (click)="showAll()"
+          type="button"
+          [class]="
+            'px-5 py-2 rounded-full text-sm font-medium cursor-pointer ' +
+            (activeTab === 'all'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200')
+          "
+        >
+          All
+        </button>
+
+        <button
+          (click)="showUnRead()"
+          type="button"
+          [class]="
+            'px-5 py-2 rounded-full text-sm font-medium cursor-pointer ' +
+            (activeTab === 'unread'
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200')
+          "
+        >
+          Unread
+          <i class="bg-red-500 rounded-full text-white p-1 px-2 ms-2">{{ unReadCount() }}</i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <app-notification-section></app-notification-section>
+  </div>
+</section>

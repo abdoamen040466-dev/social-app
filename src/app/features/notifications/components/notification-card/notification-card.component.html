@@ -1,0 +1,53 @@
+<div (click)="clickNotification()" class="p-4 md:p-5">
+  <div class="flex flex-col gap-2">
+    <!-- Like Notification -->
+    <div
+      [class]="notification.isRead ? 'bg-gray-100' : ''"
+      class="flex items-center gap-4 p-4 rounded-xl border border-gray-200 bg-blue-50 hover:bg-gray-100 cursor-pointer transition"
+    >
+      <!-- Actor -->
+      <div class="relative shrink-0">
+        <img [src]="notification.actor.photo" alt="" class="w-12 h-12 rounded-full object-cover" />
+
+        <div
+          class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center border-2 border-white"
+        >
+          @if (notification.entityType === 'post') {
+            <i class="fa-solid fa-thumbs-up text-xs"></i>
+          } @else {
+            <i class="fa-solid fa-comment"></i>
+          }
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="flex-1 min-w-0">
+        <p class="text-sm text-gray-800">
+          <span class="font-bold">{{ notification.actor.name }}</span>
+          {{ getNotificationText(notification) }}
+        </p>
+
+        <p class="text-sm text-gray-500 mt-1 truncate">
+          @if (notification.entity.unavailable) {
+            <p class="text-red-700">post is no longer available</p>
+          } @else {
+            <p>
+              {{
+                notification.entityType === 'post'
+                  ? notification.entity.body
+                  : notification.entity.content
+              }}
+            </p>
+          }
+        </p>
+
+        <p class="text-xs text-gray-400 mt-1">{{ notification.createdAt }}</p>
+      </div>
+
+      <!-- Unread -->
+      @if (!notification.isRead) {
+        <span class="w-2.5 h-2.5 bg-blue-600 rounded-full shrink-0"></span>
+      }
+    </div>
+  </div>
+</div>
